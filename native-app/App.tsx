@@ -1,7 +1,8 @@
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Button, Dimensions } from "react-native";
 
 export default function App() {
+  const width = Dimensions.get("window").width;
   return (
     <View style={styles.container}>
       <View style={styles.wrapper}>
@@ -13,32 +14,38 @@ export default function App() {
           backgroundColor: "lightblue",
           alignItems: "flex-end",
           height: 500,
-          //justifyContent: "space-around",
-
           flexDirection: "row",
-          flexWrap: "wrap-reverse",
-          alignContent: "space-around",
+          gap: 10,
+          flexWrap: "wrap",
         }}
       >
-        <View style={{ backgroundColor: "tomato", width: "50%", height: 100 }}>
-          <Text>Text</Text>
+        <View
+          style={{
+            backgroundColor: "tomato",
+            width: width / 2 - 5,
+            height: 100,
+          }}
+        >
+          <Text>1</Text>
         </View>
         <View
           style={{
             backgroundColor: "purple",
-            width: "50%",
             height: 100,
-            //alignSelf: "stretch",
+            width: width / 2 - 5,
           }}
-        ></View>
+        >
+          <Text>2</Text>
+        </View>
         <View
           style={{
             backgroundColor: "aquamarine",
-            width: "50%",
             height: 100,
-            //alignSelf: "center",
+            width: width / 2 - 5,
           }}
-        ></View>
+        >
+          <Text>3</Text>
+        </View>
       </View>
     </View>
   );

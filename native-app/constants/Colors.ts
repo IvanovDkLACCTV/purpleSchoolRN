@@ -1,26 +1,19 @@
-const tintColorLight = "#000";
-const tintColorDark = "#fff";
-const accentColorLight = "tomato";
-const accentColorDark = "red";
-const purpleBackground = "#2E2D3D";
+const inputBackgraundColorLight = "#fff";
+const inputBackgraundColorDark = "#2E2D3D";
+const headerTextColorLight = "#000";
+const textColorLight = "#3F3D56";
+const accentColorLight = "#50C2C9";
+const backgrondColorLight = "#F0F4F3";
 
 export const Colors = {
   light: {
-    text: "#11181C",
-    background: "lightgray",
-    tint: tintColorLight,
-    icon: "#687076",
-    tabIconDefault: "#687076",
-    tabIconSelected: tintColorLight,
-    accent: accentColorLight,
+    background: backgrondColorLight,
+    text: textColorLight,
+    tint: accentColorLight,
+    headerText: headerTextColorLight,
+    inputBackground: inputBackgraundColorLight,
   },
   dark: {
-    text: "#ECEDEE",
-    background: purpleBackground,
-    tint: tintColorDark,
-    icon: "#9BA1A6",
-    tabIconDefault: "#9BA1A6",
-    tabIconSelected: tintColorDark,
-    accent: accentColorDark,
+    inputBackground: inputBackgraundColorDark,
   },
 };

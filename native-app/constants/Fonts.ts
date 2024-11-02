@@ -1,5 +1,5 @@
-const fontFamily = "Poppins_400Regular";
+import { Poppins_400Regular } from "@expo-google-fonts/poppins";
 
 export const Fonts = {
-  fontFamily: fontFamily,
+  fontFamily: "Poppins_400Regular",
 };

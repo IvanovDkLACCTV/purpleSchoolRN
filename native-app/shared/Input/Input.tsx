@@ -1,12 +1,12 @@
 import { TextInput, StyleSheet } from "react-native";
-import { Colors } from "../../constants/Colors";
+import { Theme } from "../../constants/Colors";
 
 interface InputProps {
   isDarkMode: boolean;
 }
 
 export const Input = ({ isDarkMode }: InputProps) => {
-  const theme = isDarkMode ? Colors.dark : Colors.light;
+  const theme = isDarkMode ? Theme.dark : Theme.light;
 
   return (
     <>

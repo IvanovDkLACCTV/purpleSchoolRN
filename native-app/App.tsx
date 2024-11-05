@@ -14,14 +14,14 @@ import {
 import { useState } from "react";
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 //inner imports
-import { Colors } from "./constants/Colors";
+import { Theme } from "./constants/Colors"; // Changed from Colors to Theme
 import { Width } from "./constants/Sizes";
 import { Fonts } from "./constants/Fonts";
 import { Input } from "./shared/Input/Input";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const theme = isDarkMode ? Colors.dark : Colors.light;
+  const theme = isDarkMode ? Theme.dark : Theme.light; // Changed from Colors to Theme
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -121,7 +121,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Colors.light.background,
+    backgroundColor: Theme.light.background, // Changed from Colors to Theme
     justifyContent: "center",
     flex: 1,
     width: Width,
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontFamily: "Poppins_400Regular",
-    color: Colors.light.text,
+    color: Theme.light.text, // Changed from Colors to Theme
     fontSize: 24,
   },
   form: {

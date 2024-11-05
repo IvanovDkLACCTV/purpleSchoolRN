@@ -18,6 +18,7 @@ import { Theme } from "./constants/Colors"; // Changed from Colors to Theme
 import { Width } from "./constants/Sizes";
 import { Fonts } from "./constants/Fonts";
 import { Input } from "./shared/Input/Input";
+import { Gaps, Radius } from "./shared/tokens";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -69,9 +70,7 @@ export default function App() {
           </Text>
           <TouchableOpacity
             style={[styles.button, { backgroundColor: theme.tint }]}
-            onPress={() => {
-              /* your login logic */
-            }}
+            onPress={() => {}}
           >
             <Text style={[styles.buttonText, { color: "white" }]}>
               {"login".charAt(0).toUpperCase() + "login".slice(1)}
@@ -80,7 +79,7 @@ export default function App() {
           <View
             style={{
               flexDirection: "row",
-              gap: 8,
+              gap: Gaps.g8,
               alignSelf: "center",
               alignItems: "center",
               marginTop: 30,
@@ -121,7 +120,7 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: Theme.light.background, // Changed from Colors to Theme
+    backgroundColor: Theme.light.background,
     justifyContent: "center",
     flex: 1,
     width: Width,
@@ -137,7 +136,7 @@ const styles = StyleSheet.create({
   },
   content: {
     alignItems: "center",
-    gap: 50,
+    gap: Gaps.g50,
     marginTop: Width * 0.2,
   },
   textStyle: {
@@ -147,7 +146,7 @@ const styles = StyleSheet.create({
   },
   form: {
     alignSelf: "stretch",
-    gap: 16,
+    gap: Gaps.g16,
   },
   bottom: {
     position: "absolute",
@@ -157,7 +156,7 @@ const styles = StyleSheet.create({
   },
   button: {
     padding: 12,
-    borderRadius: 8,
+    borderRadius: Radius.r10,
     alignItems: "center",
   },
   buttonText: {

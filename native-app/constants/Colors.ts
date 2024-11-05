@@ -9,11 +9,11 @@ export const Theme = {
     phText: Colors.phTextLight,
   },
   dark: {
-    background: Colors.backgroundColorDark,
+    background: Colors.black,
     text: Colors.textColorDark,
     tint: Colors.accentColorLight,
     headerText: Colors.headerTextColorDark,
-    inputBackground: Colors.inputBackgroundColorDark,
-    phText: Colors.phTextDark,
+    inputBackground: Colors.violetDark,
+    phText: Colors.gray,
   },
 };

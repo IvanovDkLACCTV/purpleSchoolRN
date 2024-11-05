@@ -1,5 +1,6 @@
 import { TextInput, StyleSheet } from "react-native";
 import { Theme } from "../../constants/Colors";
+import { Radius } from "../tokens";
 
 interface InputProps {
   isDarkMode: boolean;
@@ -40,7 +41,7 @@ export const Input = ({ isDarkMode }: InputProps) => {
 
 const styles = StyleSheet.create({
   input: {
-    borderRadius: 20,
+    borderRadius: Radius.r20,
     paddingLeft: 24,
     paddingRight: 16,
     paddingVertical: 12,

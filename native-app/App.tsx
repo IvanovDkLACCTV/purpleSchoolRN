@@ -17,6 +17,7 @@ import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 import { Colors } from "./constants/Colors";
 import { Width } from "./constants/Sizes";
 import { Fonts } from "./constants/Fonts";
+import { Input } from "./shared/Input/Input";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -57,28 +58,7 @@ export default function App() {
           Welcome back
         </Text>
         <View style={styles.form}>
-          <TextInput
-            placeholder="Enter your email"
-            style={[
-              styles.input,
-              {
-                backgroundColor: theme.inputBackground,
-                color: theme.text,
-                marginBottom: 10,
-              },
-            ]}
-          />
-          <TextInput
-            placeholder="Enter your password"
-            style={[
-              styles.input,
-              {
-                backgroundColor: theme.inputBackground,
-                color: theme.text,
-                marginTop: 10,
-              },
-            ]}
-          />
+          <Input isDarkMode={isDarkMode} />
           <Text
             style={[
               styles.textStyle,
@@ -168,17 +148,6 @@ const styles = StyleSheet.create({
   form: {
     alignSelf: "stretch",
     gap: 16,
-  },
-  input: {
-    backgroundColor: Colors.light.inputBackground,
-    color: Colors.light.text,
-    borderRadius: 20,
-    paddingLeft: 24,
-    paddingRight: 16,
-    paddingVertical: 12,
-    fontSize: 14,
-    height: 50,
-    fontFamily: "Poppins_400Regular",
   },
   bottom: {
     position: "absolute",

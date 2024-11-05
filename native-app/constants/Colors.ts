@@ -1,5 +1,5 @@
 const inputBackgroundColorLight = "#fff";
-const inputBackgroundColorDark = "#2E2D3D";
+const inputBackgroundColorDark = "#16171D";
 const headerTextColorLight = "#000";
 const headerTextColorDark = "#fff";
 const textColorLight = "#3F3D56";

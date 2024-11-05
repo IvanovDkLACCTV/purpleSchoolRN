@@ -72,46 +72,25 @@ export default function App() {
             style={[styles.button, { backgroundColor: theme.tint }]}
             onPress={() => {}}
           >
-            <Text style={[styles.buttonText, { color: "white" }]}>
-              {"login".charAt(0).toUpperCase() + "login".slice(1)}
-            </Text>
+            <Text style={[styles.buttonText, { color: "white" }]}>Login</Text>
           </TouchableOpacity>
-          <View
-            style={{
-              flexDirection: "row",
-              gap: Gaps.g8,
-              alignSelf: "center",
-              alignItems: "center",
-              marginTop: 30,
-            }}
-          >
-            <Text
-              style={{
-                fontFamily: "Poppins_400Regular",
-                color: theme.text,
-                fontSize: 16,
-              }}
-            >
-              Don't have an account?
-            </Text>
-            <Text
-              style={{
-                fontFamily: "Poppins_400Regular",
-                color: theme.tint,
-                fontSize: 16,
-              }}
-            >
-              Sign up
-            </Text>
-          </View>
+        </View>
+
+        <View style={styles.signupContainer}>
+          <Text style={[styles.text, { color: theme.text }]}>
+            Don't have an account?
+          </Text>
+          <TouchableOpacity onPress={() => {}}>
+            <Text style={[styles.text, { color: theme.tint }]}>Sign up</Text>
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.bottom}>
         <Switch
           value={isDarkMode}
           onValueChange={setIsDarkMode}
-          thumbColor={theme.tint}
-          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isDarkMode ? Theme.dark.tint : Theme.light.tint}
+          trackColor={{ false: Theme.dark.tint, true: Theme.light.tint }}
         />
       </View>
     </View>
@@ -141,7 +120,7 @@ const styles = StyleSheet.create({
   },
   textStyle: {
     fontFamily: "Poppins_400Regular",
-    color: Theme.light.text, // Changed from Colors to Theme
+    color: Theme.light.text,
     fontSize: 24,
   },
   form: {
@@ -160,6 +139,17 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
+    fontFamily: "Poppins_400Regular",
+    fontSize: 16,
+  },
+  signupContainer: {
+    flexDirection: "row",
+    gap: Gaps.g8,
+    alignSelf: "center",
+    alignItems: "center",
+    marginTop: 30,
+  },
+  text: {
     fontFamily: "Poppins_400Regular",
     fontSize: 16,
   },

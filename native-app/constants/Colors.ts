@@ -11,7 +11,7 @@ export const Theme = {
   dark: {
     background: Colors.black,
     text: Colors.textColorDark,
-    tint: Colors.accentColorLight,
+    tint: Colors.primary,
     headerText: Colors.headerTextColorDark,
     inputBackground: Colors.violetDark,
     phText: Colors.gray,

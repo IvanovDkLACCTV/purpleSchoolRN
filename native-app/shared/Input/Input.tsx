@@ -12,6 +12,7 @@ export const Input = ({ isDarkMode }: InputProps) => {
     <>
       <TextInput
         placeholder="Enter your email"
+        placeholderTextColor={theme.phText}
         style={[
           styles.input,
           {
@@ -23,6 +24,7 @@ export const Input = ({ isDarkMode }: InputProps) => {
       />
       <TextInput
         placeholder="Enter your password"
+        placeholderTextColor={theme.phText}
         style={[
           styles.input,
           {
@@ -38,8 +40,6 @@ export const Input = ({ isDarkMode }: InputProps) => {
 
 const styles = StyleSheet.create({
   input: {
-    backgroundColor: Colors.light.inputBackground,
-    color: Colors.light.text,
     borderRadius: 20,
     paddingLeft: 24,
     paddingRight: 16,

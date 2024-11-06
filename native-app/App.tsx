@@ -59,7 +59,18 @@ export default function App() {
           Welcome back
         </Text>
         <View style={styles.form}>
-          <Input isDarkMode={isDarkMode} />
+          <Input
+            isDarkMode={isDarkMode}
+            placeholder="Enter your email"
+            autoCapitalize="none"
+            keyboardType="email-address"
+          />
+          <Input
+            isDarkMode={isDarkMode}
+            placeholder="Enter your password"
+            isPassword={true}
+            autoCapitalize="none"
+          />
           <Text
             style={[
               styles.textStyle,

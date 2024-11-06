@@ -1,40 +1,39 @@
-import { TextInput, StyleSheet } from "react-native";
+import { TextInput, StyleSheet, TextInputProps, Pressable } from "react-native";
+import React, { useState } from "react";
 import { Theme } from "../../constants/Colors";
 import { Radius } from "../tokens";
+import EyeClosedIcon from "../../assets/icons/eye-closed";
+import EyeOpenedIcon from "../../assets/icons/eye-opened";
 
 interface InputProps {
   isDarkMode: boolean;
+  isPassword?: boolean;
 }
 
-export const Input = ({ isDarkMode }: InputProps) => {
+export const Input = (props: TextInputProps & InputProps) => {
+  const { isDarkMode, isPassword, ...restProps } = props;
   const theme = isDarkMode ? Theme.dark : Theme.light;
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true);
 
   return (
     <>
       <TextInput
-        placeholder="Enter your email"
-        placeholderTextColor={theme.phText}
         style={[
           styles.input,
           {
             backgroundColor: theme.inputBackground,
             color: theme.text,
-            marginBottom: 10,
           },
         ]}
-      />
-      <TextInput
-        placeholder="Enter your password"
         placeholderTextColor={theme.phText}
-        style={[
-          styles.input,
-          {
-            backgroundColor: theme.inputBackground,
-            color: theme.text,
-            marginTop: 10,
-          },
-        ]}
+        secureTextEntry={isPasswordVisible}
+        {...restProps}
       />
+      {props.isPassword && (
+        <Pressable>
+          {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenedIcon />}
+        </Pressable>
+      )}
     </>
   );
 };

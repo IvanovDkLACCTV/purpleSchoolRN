@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     gap: Gaps.g8,
     alignSelf: "center",
     alignItems: "center",
-    marginTop: 30,
+    marginTop: Gaps.g8,
   },
   text: {
     fontFamily: "Poppins_400Regular",

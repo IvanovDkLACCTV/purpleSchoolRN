@@ -1,4 +1,10 @@
-import { TextInput, StyleSheet, TextInputProps, Pressable } from "react-native";
+import {
+  TextInput,
+  StyleSheet,
+  TextInputProps,
+  Pressable,
+  View,
+} from "react-native";
 import React, { useState } from "react";
 import { Theme } from "../../constants/Colors";
 import { Radius } from "../tokens";
@@ -10,13 +16,13 @@ interface InputProps {
   isPassword?: boolean;
 }
 
-export const Input = (props: TextInputProps & InputProps) => {
-  const { isDarkMode, isPassword, ...restProps } = props;
+export const Input = (props: TextInputProps & { isPassword?: boolean }) => {
+  const [isDarkMode] = useState<boolean>(false);
   const theme = isDarkMode ? Theme.dark : Theme.light;
-  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(true);
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
   return (
-    <>
+    <View>
       <TextInput
         style={[
           styles.input,
@@ -26,15 +32,18 @@ export const Input = (props: TextInputProps & InputProps) => {
           },
         ]}
         placeholderTextColor={theme.phText}
-        secureTextEntry={isPasswordVisible}
-        {...restProps}
+        secureTextEntry={props.isPassword && !isPasswordVisible}
+        {...props}
       />
       {props.isPassword && (
-        <Pressable>
-          {isPasswordVisible ? <EyeClosedIcon /> : <EyeOpenedIcon />}
+        <Pressable
+          style={styles.eyeIcon}
+          onPress={() => setIsPasswordVisible(!isPasswordVisible)}
+        >
+          {isPasswordVisible ? <EyeOpenedIcon /> : <EyeClosedIcon />}
         </Pressable>
       )}
-    </>
+    </View>
   );
 };
 
@@ -47,5 +56,10 @@ const styles = StyleSheet.create({
     fontSize: 14,
     height: 50,
     fontFamily: "Poppins_400Regular",
+  },
+  eyeIcon: {
+    position: "absolute",
+    right: 20,
+    top: 12,
   },
 });

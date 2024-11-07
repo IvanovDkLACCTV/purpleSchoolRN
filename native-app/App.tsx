@@ -4,7 +4,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Button,
   Dimensions,
   TextInput,
   Image,
@@ -19,6 +18,7 @@ import { Width } from "./constants/Sizes";
 import { Fonts } from "./constants/Fonts";
 import { Input } from "./shared/Input/Input";
 import { Gaps, Radius } from "./shared/tokens";
+import { Button } from "./shared/Button/Button";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -63,11 +63,13 @@ export default function App() {
             placeholder="Enter your email"
             autoCapitalize="none"
             keyboardType="email-address"
+            isDarkMode={isDarkMode}
           />
           <Input
             placeholder="Enter your password"
             isPassword={true}
             autoCapitalize="none"
+            isDarkMode={isDarkMode}
           />
           <Text
             style={[
@@ -77,12 +79,7 @@ export default function App() {
           >
             Forget password?
           </Text>
-          <TouchableOpacity
-            style={[styles.button, { backgroundColor: theme.tint }]}
-            onPress={() => {}}
-          >
-            <Text style={[styles.buttonText, { color: "white" }]}>Login</Text>
-          </TouchableOpacity>
+          <Button title="Login" isDarkMode={isDarkMode} onPress={() => {}} />
         </View>
 
         <View style={styles.signupContainer}>
@@ -141,15 +138,6 @@ const styles = StyleSheet.create({
     bottom: Width * 0.1,
     right: Width * 0.1,
     zIndex: 1,
-  },
-  button: {
-    padding: 12,
-    borderRadius: Radius.r10,
-    alignItems: "center",
-  },
-  buttonText: {
-    fontFamily: "Poppins_400Regular",
-    fontSize: 16,
   },
   signupContainer: {
     flexDirection: "row",

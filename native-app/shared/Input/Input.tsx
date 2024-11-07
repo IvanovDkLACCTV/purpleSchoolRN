@@ -11,13 +11,13 @@ import { Radius } from "../tokens";
 import EyeClosedIcon from "../../assets/icons/eye-closed";
 import EyeOpenedIcon from "../../assets/icons/eye-opened";
 
-interface InputProps {
+interface InputProps extends TextInputProps {
   isDarkMode: boolean;
   isPassword?: boolean;
 }
 
-export const Input = (props: TextInputProps & { isPassword?: boolean }) => {
-  const [isDarkMode] = useState<boolean>(false);
+export const Input = (props: InputProps) => {
+  const { isDarkMode, isPassword, ...restProps } = props;
   const theme = isDarkMode ? Theme.dark : Theme.light;
   const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
 
@@ -32,10 +32,10 @@ export const Input = (props: TextInputProps & { isPassword?: boolean }) => {
           },
         ]}
         placeholderTextColor={theme.phText}
-        secureTextEntry={props.isPassword && !isPasswordVisible}
-        {...props}
+        secureTextEntry={isPassword && !isPasswordVisible}
+        {...restProps}
       />
-      {props.isPassword && (
+      {isPassword && (
         <Pressable
           style={styles.eyeIcon}
           onPress={() => setIsPasswordVisible(!isPasswordVisible)}

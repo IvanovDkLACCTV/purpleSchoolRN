@@ -17,7 +17,7 @@ import { Theme } from "./constants/Colors"; // Changed from Colors to Theme
 import { Width } from "./constants/Sizes";
 import { Fonts } from "./constants/Fonts";
 import { Input } from "./shared/Input/Input";
-import { Gaps, Radius } from "./shared/tokens";
+import { Gaps, Radius, FontSize } from "./shared/tokens";
 import { Button } from "./shared/Button/Button";
 
 export default function App() {
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
   textStyle: {
     fontFamily: "Poppins_400Regular",
     color: Theme.light.text,
-    fontSize: 24,
+    fontSize: FontSize.f24,
   },
   form: {
     alignSelf: "stretch",

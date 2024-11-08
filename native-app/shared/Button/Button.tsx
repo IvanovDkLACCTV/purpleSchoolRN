@@ -3,9 +3,11 @@ import {
   Text,
   TouchableOpacity,
   TouchableOpacityProps,
+  Pressable,
+  View,
 } from "react-native";
 import { Theme } from "../../constants/Colors";
-import { Radius } from "../tokens";
+import { Radius, FontSize } from "../tokens";
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
@@ -21,12 +23,13 @@ export const Button = ({
   const theme = isDarkMode ? Theme.dark : Theme.light;
 
   return (
-    <TouchableOpacity
-      style={[styles.button, { backgroundColor: theme.tint }, style]}
-      {...props}
-    >
-      <Text style={[styles.buttonText, { color: "white" }]}>{title}</Text>
-    </TouchableOpacity>
+    <Pressable {...props}>
+      <View style={[styles.button, { backgroundColor: theme.tint }, style]}>
+        <Text style={[styles.buttonText, { color: Theme.dark.text }]}>
+          {title}
+        </Text>
+      </View>
+    </Pressable>
   );
 };
 
@@ -38,6 +41,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     fontFamily: "Poppins_400Regular",
-    fontSize: 16,
+    fontSize: FontSize.f16,
   },
 });

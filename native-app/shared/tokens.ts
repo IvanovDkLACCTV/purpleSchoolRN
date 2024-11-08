@@ -2,9 +2,9 @@ export const Colors = {
   inputBackgroundColorLight: "#fff",
   inputBackgroundColorDark: "#2E2D3D",
   headerTextColorLight: "#000",
-  headerTextColorDark: "#fff",
+  headerTextColorDark: "#FAFAFA",
   textColorLight: "#000",
-  textColorDark: "#fff",
+  textColorDark: "#FAFAFA",
   accentColorLight: "#50C2C9",
   backgroundColorLight: "#F0F4F3",
   backgroundColorDark: "#1E1E1E",
@@ -27,4 +27,11 @@ export const Gaps = {
 export const Radius = {
   r10: 10,
   r20: 20,
+};
+
+export const FontSize = {
+  f16: 16,
+  f18: 18,
+  f20: 20,
+  f24: 24,
 };

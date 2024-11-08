@@ -5,9 +5,11 @@ import {
   TouchableOpacityProps,
   Pressable,
   View,
+  Animated,
 } from "react-native";
 import { Theme } from "../../constants/Colors";
 import { Radius, FontSize } from "../tokens";
+import { useEffect } from "react";
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;
@@ -20,15 +22,34 @@ export const Button = ({
   style,
   ...props
 }: ButtonProps) => {
+  const animatedValue = new Animated.ValueXY({
+    //величина, которая будет изменяться
+    x: 0,
+    y: 0,
+  });
   const theme = isDarkMode ? Theme.dark : Theme.light;
+  Animated.spring(animatedValue, {
+    //анимация
+    toValue: { x: 100, y: 100 },
+    useNativeDriver: false,
+  }).start();
 
   return (
     <Pressable {...props}>
-      <View style={[styles.button, { backgroundColor: theme.tint }, style]}>
+      <Animated.View
+        style={[
+          styles.button,
+          {
+            backgroundColor: theme.tint,
+            width: animatedValue.x,
+            height: animatedValue.y,
+          },
+        ]}
+      >
         <Text style={[styles.buttonText, { color: Theme.dark.text }]}>
           {title}
         </Text>
-      </View>
+      </Animated.View>
     </Pressable>
   );
 };

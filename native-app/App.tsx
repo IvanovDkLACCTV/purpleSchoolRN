@@ -13,7 +13,7 @@ import {
 import { useState } from "react";
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 //inner imports
-import { Theme } from "./constants/Colors"; // Changed from Colors to Theme
+import { Theme } from "./constants/Colors";
 import { Width } from "./constants/Sizes";
 import { Fonts } from "./constants/Fonts";
 import { Input } from "./shared/Input/Input";
@@ -22,7 +22,7 @@ import { Button } from "./shared/Button/Button";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
-  const theme = isDarkMode ? Theme.dark : Theme.light; // Changed from Colors to Theme
+  const theme = isDarkMode ? Theme.dark : Theme.light;
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,

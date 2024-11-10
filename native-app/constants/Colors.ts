@@ -1,4 +1,4 @@
-import { Colors } from "../shared/tokens";
+import { Colors } from '../shared/tokens'
 export const Theme = {
   light: {
     background: Colors.backgroundColorLight,
@@ -7,6 +7,9 @@ export const Theme = {
     headerText: Colors.headerTextColorLight,
     inputBackground: Colors.inputBackgroundColorLight,
     phText: Colors.phTextLight,
+    hover: Colors.preHover,
+    preHover: Colors.accentColorLight,
+    lighter: Colors.preHover,
   },
   dark: {
     background: Colors.black,
@@ -15,5 +18,8 @@ export const Theme = {
     headerText: Colors.headerTextColorDark,
     inputBackground: Colors.violetDark,
     phText: Colors.gray,
+    hover: Colors.primaryHover,
+    preHover: Colors.primary,
+    lighter: Colors.inputBackgroundColorDark,
   },
-};
+}

@@ -1,31 +1,27 @@
 //outer imports
-import { StatusBar } from "expo-status-bar";
 import {
   StyleSheet,
   Text,
   View,
-  Dimensions,
-  TextInput,
   Image,
   Switch,
   TouchableOpacity,
-  Alert,
-  ToastAndroid,
-  Platform,
 } from "react-native";
 import { useState } from "react";
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 //inner imports
 import { Theme } from "./constants/Colors";
 import { Width } from "./constants/Sizes";
-import { Fonts } from "./constants/Fonts";
 import { Input } from "./shared/Input/Input";
-import { Gaps, Radius, FontSize } from "./shared/tokens";
+import { Gaps, FontSize } from "./shared/tokens";
 import { Button } from "./shared/Button/Button";
+import { ErrorNotification } from "./shared/ErrorNotification/ErrorNotification";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? Theme.dark : Theme.light;
+
+  const [error, setError] = useState<string | undefined>();
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -36,24 +32,17 @@ export default function App() {
   }
 
   const alert = () => {
-    if (Platform.OS === "android") {
-      //Toast
-      ToastAndroid.showWithGravity(
-        "login Error",
-        ToastAndroid.SHORT,
-        ToastAndroid.CENTER
-      );
-    } else {
-      //Alert
-      Alert.alert("Pozor!", "Kurwa, your login wasn't successful", [
-        { text: "OK", onPress: () => {}, style: "cancel" },
-      ]);
-    }
+    setError("Login or password is incorrect");
   };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={styles.top}>
+        <ErrorNotification
+          error={error}
+          isDarkMode={isDarkMode}
+          onDismiss={alert}
+        />
         <Image
           source={
             isDarkMode

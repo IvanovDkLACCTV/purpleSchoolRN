@@ -1,4 +1,4 @@
-import { Colors } from '../shared/tokens'
+import { Colors } from "../shared/tokens";
 export const Theme = {
   light: {
     background: Colors.backgroundColorLight,
@@ -10,6 +10,7 @@ export const Theme = {
     hover: Colors.preHover,
     preHover: Colors.accentColorLight,
     lighter: Colors.preHover,
+    error: Colors.tomato,
   },
   dark: {
     background: Colors.black,
@@ -21,5 +22,6 @@ export const Theme = {
     hover: Colors.primaryHover,
     preHover: Colors.primary,
     lighter: Colors.inputBackgroundColorDark,
+    error: Colors.red,
   },
-}
+};

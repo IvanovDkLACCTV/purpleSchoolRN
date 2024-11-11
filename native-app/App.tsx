@@ -1,43 +1,82 @@
 //outer imports
-import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View, Dimensions, TextInput, Image, Switch, TouchableOpacity } from 'react-native'
-import { useState } from 'react'
-import { useFonts, Poppins_400Regular } from '@expo-google-fonts/poppins'
+import { StatusBar } from "expo-status-bar";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Dimensions,
+  TextInput,
+  Image,
+  Switch,
+  TouchableOpacity,
+  Alert,
+  ToastAndroid,
+  Platform,
+} from "react-native";
+import { useState } from "react";
+import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 //inner imports
-import { Theme } from './constants/Colors'
-import { Width } from './constants/Sizes'
-import { Fonts } from './constants/Fonts'
-import { Input } from './shared/Input/Input'
-import { Gaps, Radius, FontSize } from './shared/tokens'
-import { Button } from './shared/Button/Button'
+import { Theme } from "./constants/Colors";
+import { Width } from "./constants/Sizes";
+import { Fonts } from "./constants/Fonts";
+import { Input } from "./shared/Input/Input";
+import { Gaps, Radius, FontSize } from "./shared/tokens";
+import { Button } from "./shared/Button/Button";
 
 export default function App() {
-  const [isDarkMode, setIsDarkMode] = useState(false)
-  const theme = isDarkMode ? Theme.dark : Theme.light
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const theme = isDarkMode ? Theme.dark : Theme.light;
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
-  })
+  });
 
   if (!fontsLoaded) {
-    return null
+    return null;
   }
+
+  const alert = () => {
+    if (Platform.OS === "android") {
+      //Toast
+      ToastAndroid.showWithGravity(
+        "login Error",
+        ToastAndroid.SHORT,
+        ToastAndroid.CENTER
+      );
+    } else {
+      //Alert
+      Alert.alert("Pozor!", "Kurwa, your login wasn't successful", [
+        { text: "OK", onPress: () => {}, style: "cancel" },
+      ]);
+    }
+  };
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
       <View style={styles.top}>
         <Image
-          source={isDarkMode ? require('./assets/shapeDark.png') : require('./assets/shapeLight.png')}
+          source={
+            isDarkMode
+              ? require("./assets/shapeDark.png")
+              : require("./assets/shapeLight.png")
+          }
           style={{
-            resizeMode: 'contain',
-            position: 'absolute',
+            resizeMode: "contain",
+            position: "absolute",
             top: 0,
             left: 0,
           }}
         />
       </View>
       <View style={styles.content}>
-        <Text style={[styles.textStyle, { color: theme.headerText, fontWeight: 'bold' }]}>Welcome back</Text>
+        <Text
+          style={[
+            styles.textStyle,
+            { color: theme.headerText, fontWeight: "bold" },
+          ]}
+        >
+          Welcome back
+        </Text>
         <View style={styles.form}>
           <Input
             placeholder="Enter your email"
@@ -51,16 +90,27 @@ export default function App() {
             autoCapitalize="none"
             isDarkMode={isDarkMode}
           />
-          <Text style={[styles.textStyle, { color: theme.tint, fontSize: 13, alignSelf: 'center' }]}>Forget password?</Text>
+          <Text
+            style={[
+              styles.textStyle,
+              { color: theme.tint, fontSize: 13, alignSelf: "center" },
+            ]}
+          >
+            Forget password?
+          </Text>
           <Button
             title="Login"
             isDarkMode={isDarkMode}
-            onPress={() => {}}
+            onPress={() => {
+              alert();
+            }}
           />
         </View>
 
         <View style={styles.signupContainer}>
-          <Text style={[styles.text, { color: theme.text }]}>Don't have an account?</Text>
+          <Text style={[styles.text, { color: theme.text }]}>
+            Don't have an account?
+          </Text>
           <TouchableOpacity onPress={() => {}}>
             <Text style={[styles.text, { color: theme.tint }]}>Sign up</Text>
           </TouchableOpacity>
@@ -75,54 +125,54 @@ export default function App() {
         />
       </View>
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: Theme.light.background,
-    justifyContent: 'center',
+    justifyContent: "center",
     flex: 1,
     width: Width,
     padding: Width * 0.1,
     paddingTop: 0,
   },
   top: {
-    position: 'absolute',
+    position: "absolute",
     top: 0,
     left: 0,
     right: 0,
     height: Width * 0.5,
   },
   content: {
-    alignItems: 'center',
+    alignItems: "center",
     gap: Gaps.g50,
     marginTop: Width * 0.2,
   },
   textStyle: {
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: "Poppins_400Regular",
     color: Theme.light.text,
     fontSize: FontSize.f24,
   },
   form: {
-    alignSelf: 'stretch',
+    alignSelf: "stretch",
     gap: Gaps.g16,
   },
   bottom: {
-    position: 'absolute',
+    position: "absolute",
     bottom: Width * 0.1,
     right: Width * 0.1,
     zIndex: 1,
   },
   signupContainer: {
-    flexDirection: 'row',
+    flexDirection: "row",
     gap: Gaps.g8,
-    alignSelf: 'center',
-    alignItems: 'center',
+    alignSelf: "center",
+    alignItems: "center",
     marginTop: Gaps.g8,
   },
   text: {
-    fontFamily: 'Poppins_400Regular',
+    fontFamily: "Poppins_400Regular",
     fontSize: 16,
   },
-})
+});

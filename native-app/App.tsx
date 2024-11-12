@@ -33,6 +33,9 @@ export default function App() {
 
   const alert = () => {
     setError("Login or password is incorrect");
+    setTimeout(() => {
+      setError(undefined);
+    }, 4000);
   };
 
   return (

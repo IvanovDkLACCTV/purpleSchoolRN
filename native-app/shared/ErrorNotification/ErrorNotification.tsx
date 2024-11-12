@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { Text, StyleSheet, Animated } from "react-native";
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 
 import { ErrorNotificationProps } from "./ErrorNotification.props";
 import { Theme } from "../../constants/Colors";
-import { Fonts } from "../../constants/Fonts";
 import { FontSize } from "../tokens";
 import { Width } from "../../constants/Sizes";
 
@@ -12,12 +11,23 @@ export const ErrorNotification = ({
   isDarkMode = false,
   error,
 }: ErrorNotificationProps) => {
-  const [isError, setIsError] = useState<boolean>(false);
   const theme = isDarkMode ? Theme.dark : Theme.light;
-
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
   });
+  const [isError, setIsError] = useState<boolean>(false);
+
+  const animatedValue = new Animated.Value(-100);
+
+  const onEnter = () => {
+    Animated.timing(animatedValue, {
+      duration: 300,
+      toValue: 0,
+      useNativeDriver: true,
+    }).start(() => {
+      console.log("Login error");
+    });
+  };
 
   const styles = StyleSheet.create({
     error: {
@@ -26,6 +36,7 @@ export const ErrorNotification = ({
       width: Width,
       backgroundColor: theme.error,
       padding: 15,
+      top: 40,
     },
     errorText: {
       color: theme.text,
@@ -40,6 +51,7 @@ export const ErrorNotification = ({
       return;
     }
     setIsError(true);
+
     const timer = setTimeout(() => setIsError(false), 3000);
     return () => clearTimeout(timer);
   }, [error]);
@@ -49,8 +61,11 @@ export const ErrorNotification = ({
   }
 
   return (
-    <View style={styles.error}>
+    <Animated.View
+      style={{ ...styles.error, transform: [{ translateY: animatedValue }] }}
+      onLayout={onEnter}
+    >
       <Text style={styles.errorText}>{error}</Text>
-    </View>
+    </Animated.View>
   );
 };

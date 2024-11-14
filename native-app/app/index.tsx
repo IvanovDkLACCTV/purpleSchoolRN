@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
+import { Link } from "expo-router";
 
 //inner imports
 import { Theme } from "../constants/Colors";
@@ -18,7 +19,7 @@ import { Gaps, FontSize } from "../shared/tokens";
 import { Button } from "../shared/Button/Button";
 import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification";
 
-export default function App() {
+export default function Login() {
   const [isDarkMode, setIsDarkMode] = useState(false);
   const theme = isDarkMode ? Theme.dark : Theme.light;
 
@@ -83,14 +84,13 @@ export default function App() {
             autoCapitalize="none"
             isDarkMode={isDarkMode}
           />
-          <Text
-            style={[
-              styles.textStyle,
-              { color: theme.tint, fontSize: 13, alignSelf: "center" },
-            ]}
-          >
-            Forget password?
-          </Text>
+          <Link href="/restore" style={{ alignSelf: "center" }}>
+            <Text
+              style={[styles.textStyle, { color: theme.tint, fontSize: 13 }]}
+            >
+              Forget password?
+            </Text>
+          </Link>
           <Button
             title="Login"
             isDarkMode={isDarkMode}

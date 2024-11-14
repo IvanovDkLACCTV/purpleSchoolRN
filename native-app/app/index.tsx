@@ -11,12 +11,12 @@ import { useState } from "react";
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
 
 //inner imports
-import { Theme } from "./constants/Colors";
-import { Width } from "./constants/Sizes";
-import { Input } from "./shared/Input/Input";
-import { Gaps, FontSize } from "./shared/tokens";
-import { Button } from "./shared/Button/Button";
-import { ErrorNotification } from "./shared/ErrorNotification/ErrorNotification";
+import { Theme } from "../constants/Colors";
+import { Width } from "../constants/Sizes";
+import { Input } from "../shared/Input/Input";
+import { Gaps, FontSize } from "../shared/tokens";
+import { Button } from "../shared/Button/Button";
+import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification";
 
 export default function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
@@ -50,8 +50,8 @@ export default function App() {
         <Image
           source={
             isDarkMode
-              ? require("./assets/shapeDark.png")
-              : require("./assets/shapeLight.png")
+              ? require("../assets/shapeDark.png")
+              : require("../assets/shapeLight.png")
           }
           style={{
             resizeMode: "contain",

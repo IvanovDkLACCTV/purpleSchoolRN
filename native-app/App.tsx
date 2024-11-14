@@ -9,6 +9,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
+
 //inner imports
 import { Theme } from "./constants/Colors";
 import { Width } from "./constants/Sizes";

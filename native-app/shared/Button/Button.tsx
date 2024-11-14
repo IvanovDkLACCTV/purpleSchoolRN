@@ -1,13 +1,16 @@
 import {
   StyleSheet,
   Text,
+  TouchableOpacity,
   TouchableOpacityProps,
   Pressable,
+  View,
   Animated,
   GestureResponderEvent,
 } from "react-native";
 import { Theme } from "../../constants/Colors";
-import { Radius, FontSize } from "../tokens";
+import { Radius, FontSize, Colors } from "../tokens";
+import { useEffect } from "react";
 
 interface ButtonProps extends TouchableOpacityProps {
   title: string;

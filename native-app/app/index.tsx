@@ -18,9 +18,10 @@ import { Input } from "../shared/Input/Input";
 import { Gaps, FontSize } from "../shared/tokens";
 import { Button } from "../shared/Button/Button";
 import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification";
+import { useTheme } from '../shared/ThemeContext';
 
 export default function Login() {
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, setIsDarkMode } = useTheme();
   const theme = isDarkMode ? Theme.dark : Theme.light;
 
   const [error, setError] = useState<string | undefined>();
@@ -110,12 +111,12 @@ export default function Login() {
         </View>
       </View>
       <View style={styles.bottom}>
-        <Switch
+      <Switch
           value={isDarkMode}
           onValueChange={setIsDarkMode}
           thumbColor={theme.tint}
           trackColor={{ false: theme.lighter, true: theme.lighter }}
-        />
+  />
       </View>
     </View>
   );

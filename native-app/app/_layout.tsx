@@ -15,11 +15,11 @@ export default function RootLayout() {
 function RootLayoutContent() {
   const { isDarkMode } = useTheme();
   
-  const gradientColors = isDarkMode 
-    ? [Theme.dark.preHover, Theme.dark.preHover, Theme.dark.background, Theme.dark.background]
-    : [Theme.light.lighter, Theme.light.lighter, Theme.light.background, Theme.light.background];
+const gradientColors = isDarkMode 
+  ? [Theme.dark.preHover, Theme.dark.preHover, Theme.dark.background, Theme.dark.background] as const
+  : [Theme.light.lighter, Theme.light.lighter, Theme.light.background, Theme.light.background] as const;
 
-    const locations = [0, 0.15, 0.55, 1];
+const locations = [0, 0.15, 0.55, 1] as const;
 
   return (
     <View style={{ flex: 1 }}>

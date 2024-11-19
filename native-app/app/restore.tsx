@@ -10,7 +10,7 @@ export default function Restore() {
     return (
     <View>
       <Link href={"/"}>
-        <Text>Restore</Text>
+        <Text style={{ color: "white" }}>Restore</Text>
       </Link>
     </View>)
 }

@@ -23,5 +23,6 @@ export const Theme = {
     preHover: Colors.primary,
     lighter: Colors.inputBackgroundColorDark,
     error: Colors.red,
+    gradientDarkPurple: Colors.gradientDarkPurple
   },
 };

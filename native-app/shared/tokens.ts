@@ -19,6 +19,7 @@ export const Colors = {
   preHover: "#A7E5DE",
   red: "#CC384E",
   tomato: "tomato",
+  gradientDarkPurple: "#572EA0"
 };
 
 export const Gaps = {

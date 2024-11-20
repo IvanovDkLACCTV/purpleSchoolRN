@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   buttonText: {
-    fontFamily: "Poppins_400Regular",
+    fontFamily: "Poppins",
     fontSize: FontSize.f16,
   },
 });

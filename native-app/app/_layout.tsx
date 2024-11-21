@@ -1,10 +1,13 @@
-import { Stack } from "expo-router";
+import { Stack, SplashScreen } from "expo-router";
 import { Theme } from "../constants/Colors";
 import { ThemeProvider, useTheme } from "../shared/ThemeContext";
 import { LinearGradient } from 'expo-linear-gradient';
 import { View, StatusBar } from 'react-native';
 import { SafeAreaProvider, useSafeAreaInsets } from "react-native-safe-area-context";
 import { useFonts } from "expo-font";
+import { useEffect } from "react";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
   return (
@@ -25,9 +28,21 @@ const locations = [0, 0.17, 0.55, 1] as const;
 
 const insets = useSafeAreaInsets();
 
-const [fontsLoaded] = useFonts({
+const [fontsLoaded, error] = useFonts({
   Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
 });
+
+useEffect(() => { 
+  if (fontsLoaded) {
+    SplashScreen.hideAsync();
+  }
+}, [fontsLoaded]);
+
+useEffect(() => { 
+  if (error) {
+    throw error
+  }
+}, [error]);
 
 if (!fontsLoaded) {
   return null;

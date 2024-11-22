@@ -34,7 +34,7 @@ const [fontsLoaded, error] = useFonts({
 
 useEffect(() => { 
   if (fontsLoaded) {
-    SplashScreen.hideAsync();
+    SplashScreen.hideAsync()
   }
 }, [fontsLoaded]);
 

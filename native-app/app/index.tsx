@@ -100,7 +100,7 @@ export default function Login() {
           <Text style={[styles.text, { color: theme.text }]}>
             Don't have an account?
           </Text>
-          <CustomLink href="" style={{ alignSelf: "center" }} text="Sign up" />
+          <CustomLink href="/signup" text="Sign up" />
         </View>
       </View>
       <View style={styles.bottom}>

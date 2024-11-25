@@ -17,8 +17,9 @@ export default function UnmatchedCustom() {
           source={require('../assets/images/unmatched.png')}
           resizeMode="contain"
         />
-        <Text style={[styles.text, { color: theme.text }]}>Wow, dude... Something went wrong. Try to get back to homepage</Text>
-        <CustomLink href="/" text='Homepage' />
+        <Text style={[styles.text, { color: theme.text }]}>Wow, dude... Something went wrong. Try to get back to the &nbsp; 
+          <CustomLink href="/" text='Homepage' />
+        </Text>
       </View>
       <Switch
         style={styles.themeSwitch}

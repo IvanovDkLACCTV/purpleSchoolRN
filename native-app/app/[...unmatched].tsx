@@ -1,9 +1,9 @@
 import { Image, StyleSheet, Text, View, Switch } from 'react-native';
-import { Link } from 'expo-router';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Theme } from '../constants/Colors';
 import { FontSize, Gaps } from '../shared/tokens';
 import { useTheme } from '../shared/ThemeContext';
+import { CustomLink } from '../shared/CustomLink/CustomLink';
 
 export default function UnmatchedCustom() {
   const { isDarkMode, setIsDarkMode } = useTheme();
@@ -18,11 +18,7 @@ export default function UnmatchedCustom() {
           resizeMode="contain"
         />
         <Text style={[styles.text, { color: theme.text }]}>Wow, dude... Something went wrong. Try to get back to homepage</Text>
-        <Link
-          href="/"
-          style={styles.link}>
-          <Text style={[styles.linkText, { color: theme.tint }]}>Homepage</Text>
-        </Link>
+        <CustomLink href="/" text='Homepage' />
       </View>
       <Switch
         style={styles.themeSwitch}

@@ -19,6 +19,7 @@ import { Gaps, FontSize } from "../shared/tokens";
 import { Button } from "../shared/Button/Button";
 import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification";
 import { useTheme } from '../shared/ThemeContext';
+import { CustomLink } from "../shared/CustomLink/CustomLink";
 
 export default function Login() {
   const { isDarkMode, setIsDarkMode } = useTheme();
@@ -85,13 +86,7 @@ export default function Login() {
             autoCapitalize="none"
             isDarkMode={isDarkMode}
           />
-          <Link href="/restore" style={{ alignSelf: "center" }}>
-            <Text
-              style={[styles.textStyle, { color: theme.tint, fontSize: 13 }]}
-            >
-              Forget password?
-            </Text>
-          </Link>
+          <CustomLink href="/restore" text="Forget password?" fontSize={15}/>
           <Button
             title="Login"
             isDarkMode={isDarkMode}
@@ -105,9 +100,7 @@ export default function Login() {
           <Text style={[styles.text, { color: theme.text }]}>
             Don't have an account?
           </Text>
-          <TouchableOpacity onPress={() => {}}>
-            <Text style={[styles.text, { color: theme.tint }]}>Sign up</Text>
-          </TouchableOpacity>
+          <CustomLink href="" style={{ alignSelf: "center" }} text="Sign up" />
         </View>
       </View>
       <View style={styles.bottom}>

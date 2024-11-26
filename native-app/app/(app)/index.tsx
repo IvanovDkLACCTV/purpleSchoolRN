@@ -1,7 +1,7 @@
 import { Text, View } from "react-native";
 
-export default function CoursePage() {
+export default function MyCourses() {
     return <View>
-        <Text>Course Page</Text>
+        <Text>My Courses</Text>
     </View>
 }

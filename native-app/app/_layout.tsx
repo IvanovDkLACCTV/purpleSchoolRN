@@ -79,7 +79,7 @@ function RootLayoutContent() {
               //paddingTop: insets.top,
             },
           }}>
-          <Stack.Screen name="index" />
+          <Stack.Screen name="login" />
           <Stack.Screen
             name="restore"
             options={{ headerShown: false, presentation: 'modal' }}

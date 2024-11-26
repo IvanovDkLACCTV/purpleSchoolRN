@@ -86,7 +86,7 @@ export default function Login() {
             autoCapitalize="none"
             isDarkMode={isDarkMode}
           />
-          <CustomLink href="/restore" text="Forget password?" fontSize={15}/>
+          <CustomLink href="/course/typescript" text="Forgot your password?" fontSize={14}/>
           <Button
             title="Login"
             isDarkMode={isDarkMode}

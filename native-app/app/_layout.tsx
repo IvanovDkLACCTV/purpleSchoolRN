@@ -12,7 +12,7 @@ SplashScreen.preventAutoHideAsync();
 export default function RootLayout() {
   return (
     <ThemeProvider>
-      <RootLayoutContent />
+      <RootLayoutContent /> 
     </ThemeProvider>
   );
 }

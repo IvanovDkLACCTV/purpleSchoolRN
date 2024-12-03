@@ -5,8 +5,7 @@ const starage = createJSONStorage<AuthState>(() => AsyncStorage);
 
 export const authAtom = atomWithStorage<AuthState>(
   "auth",
-  { access_token: null, isLoading: false, error: null },
-  starage
+  { access_token: null, isLoading: false, error: null }
 );
 
 export interface AuthState {

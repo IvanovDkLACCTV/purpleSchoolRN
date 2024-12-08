@@ -1,11 +1,11 @@
-import { Platform } from "react-native"
+import { Platform } from 'react-native'
 
 const ENV = {
   dev: {
-    apiUrl: "http://localhost:3000/api-v2",
+    apiUrl: 'http://localhost:3000/api-v2',
   },
   prod: {
-    apiUrl: "https://your-production-api.com/api-v2",
+    apiUrl: 'https://your-production-api.com/api-v2',
   },
 }
 
@@ -14,9 +14,9 @@ const getEnvVars = () => {
     return {
       ...ENV.dev,
       apiUrl: Platform.select({
-        ios: "http://localhost:3000/api-v2",
-        android: "http://192.168.1.143:3000/api-v2", // Special alias for Android emulator
-        default: "http://localhost:3000/api-v2",
+        ios: 'http://localhost:3000/api-v2',
+        android: 'http://192.168.1.143:3000/api-v2', // Special alias for Android emulator
+        default: 'http://localhost:3000/api-v2',
       }),
     }
   }

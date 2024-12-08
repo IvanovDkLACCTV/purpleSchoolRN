@@ -1,1 +1,1 @@
-export const PREFIX = "http://192.168.1.143:3000"
+export const PREFIX = 'http://192.168.3.12:3000';

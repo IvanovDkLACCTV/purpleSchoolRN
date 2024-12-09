@@ -1,27 +1,19 @@
-import { useAtom, useSetAtom } from "jotai"
+import { useAtomValue } from "jotai"
 import { Text, View } from "react-native"
-import { loginAtom, logoutAtom } from "../../entities/auth/model/auth.state"
+import { authAtom } from "../../entities/auth/model/auth.state"
 import { useEffect } from "react"
-import AsyncStorage from "@react-native-async-storage/async-storage"
+import { router, useRootNavigationState } from "expo-router"
 
 export default function MyCourses() {
-  const [auth, login] = useAtom(loginAtom)
-  const logout = useSetAtom(logoutAtom)
+  const { access_token } = useAtomValue(authAtom)
+  const state = useRootNavigationState()
 
   useEffect(() => {
-    login({ email: "john.doe@example.com", password: "password123" })
-  }, [])
-
-  useEffect(() => {
-    console.log(auth)
-  }, [auth])
-
-  useEffect(() => {
-    return () => {
-      logout()
-      AsyncStorage.getItem("auth").then((value) => console.log(value))
+    if (!state?.key) return
+    if (!access_token) {
+      router.replace("/login")
     }
-  }, [])
+  }, [access_token, state])
 
   return (
     <View>

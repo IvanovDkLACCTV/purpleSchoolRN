@@ -1,17 +1,26 @@
-import AsyncStorage from '@react-native-async-storage/async-storage'
-import { atomWithStorage, createJSONStorage } from 'jotai/utils'
-import { atom } from 'jotai'
-import { LoginRequest, AuthResponse } from './auth.interfaces'
-import log from '../../../logger/log'
-import { API } from '../api/api'
-import axios, { AxiosError } from 'axios'
+import AsyncStorage from "@react-native-async-storage/async-storage"
+import { atomWithStorage, createJSONStorage } from "jotai/utils"
+import { atom } from "jotai"
+import { LoginRequest, AuthResponse } from "./auth.interfaces"
+import { API } from "../api/api"
+import axios, { AxiosError } from "axios"
 
 const storage = createJSONStorage<AuthState>(() => AsyncStorage)
 
-export const authAtom = atomWithStorage<AuthState>('auth', {
+const INITIAL_STATE: AuthState = {
   access_token: null,
   isLoading: false,
   error: null,
+}
+
+export const authAtom = atomWithStorage<AuthState>(
+  "auth",
+  INITIAL_STATE,
+  storage
+)
+
+export const logoutAtom = atom(null, async (_get, set) => {
+  set(authAtom, INITIAL_STATE)
 })
 
 export const loginAtom = atom(

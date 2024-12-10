@@ -1,46 +1,65 @@
 //outer imports
-import {
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Switch,
-  TouchableOpacity,
-} from "react-native";
-import { useState } from "react";
-import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins";
-import { Link } from "expo-router";
+import { useEffect, useState } from "react"
+import { StyleSheet, Text, View, Image, Switch } from "react-native"
+import { router } from "expo-router"
+import { useAtom } from "jotai"
+import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins"
 
 //inner imports
-import { Theme } from "../constants/Colors";
-import { Width } from "../constants/Sizes";
-import { Input } from "../shared/Input/Input";
-import { Gaps, FontSize } from "../shared/tokens";
-import { Button } from "../shared/Button/Button";
-import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification";
-import { useTheme } from '../shared/ThemeContext';
-import { CustomLink } from "../shared/CustomLink/CustomLink";
+import { Theme } from "../constants/Colors"
+import { Width } from "../constants/Sizes"
+import { Input } from "../shared/Input/Input"
+import { Gaps, FontSize } from "../shared/tokens"
+import { Button } from "../shared/Button/Button"
+import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification"
+import { useTheme } from "../shared/ThemeContext"
+import { CustomLink } from "../shared/CustomLink/CustomLink"
+import { loginAtom } from "../entities/auth/model/auth.state"
 
 export default function Login() {
-  const { isDarkMode, setIsDarkMode } = useTheme();
-  const theme = isDarkMode ? Theme.dark : Theme.light;
+  const { isDarkMode, setIsDarkMode } = useTheme()
+  const theme = isDarkMode ? Theme.dark : Theme.light
 
-  const [error, setError] = useState<string | undefined>();
+  const [error, setError] = useState<string | undefined>()
+  const [email, setEmail] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
+  const [{ access_token, isLoading, error: loginError }, login] =
+    useAtom(loginAtom)
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
-  });
+  })
 
-  if (!fontsLoaded) {
-    return null;
+  const submit = async () => {
+    if (!email) {
+      setError("Email is required")
+      return
+    }
+
+    if (!password) {
+      setError("Password is required")
+      return
+    }
+
+    login({ email, password })
   }
 
-  const alert = () => {
-    setError("Login or password is incorrect");
-    setTimeout(() => {
-      setError(undefined);
-    }, 4000);
-  };
+  useEffect(() => {
+    if (loginError) {
+      setError(loginError)
+    }
+  }, [loginError])
+
+  useEffect(() => {
+    if (access_token) {
+      router.replace("/(app)")
+    }
+  }, [access_token])
+
+  // Ensure that the component does not render until fonts are loaded
+  if (!fontsLoaded) {
+    return null // This is fine as long as it doesn't skip any hooks
+  }
 
   return (
     <View style={[styles.container, { backgroundColor: theme.background }]}>
@@ -48,7 +67,7 @@ export default function Login() {
         <ErrorNotification
           error={error}
           isDarkMode={isDarkMode}
-          onDismiss={alert}
+          onDismiss={() => setError(undefined)}
         />
         <Image
           source={
@@ -79,21 +98,21 @@ export default function Login() {
             autoCapitalize="none"
             keyboardType="email-address"
             isDarkMode={isDarkMode}
+            onChangeText={setEmail}
           />
           <Input
             placeholder="Enter your password"
             isPassword={true}
             autoCapitalize="none"
             isDarkMode={isDarkMode}
+            onChangeText={setPassword}
           />
-          <CustomLink href="/course/typescript" text="Forgot your password?" fontSize={14}/>
-          <Button
-            title="Login"
-            isDarkMode={isDarkMode}
-            onPress={() => {
-              alert();
-            }}
+          <CustomLink
+            href="/course/typescript"
+            text="Forgot your password?"
+            fontSize={14}
           />
+          <Button title="Login" isDarkMode={isDarkMode} onPress={submit} />
         </View>
 
         <View style={styles.signupContainer}>
@@ -104,15 +123,15 @@ export default function Login() {
         </View>
       </View>
       <View style={styles.bottom}>
-      <Switch
+        <Switch
           value={isDarkMode}
           onValueChange={setIsDarkMode}
           thumbColor={theme.tint}
           trackColor={{ false: theme.lighter, true: theme.lighter }}
-  />
+        />
       </View>
     </View>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
@@ -162,4 +181,4 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins_400Regular",
     fontSize: 16,
   },
-});
+})

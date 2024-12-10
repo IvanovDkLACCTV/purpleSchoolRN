@@ -108,18 +108,23 @@ export default function Login() {
             onChangeText={setPassword}
           />
           <CustomLink
-            href="/course/typescript"
+            href="/restore"
             text="Forgot your password?"
             fontSize={14}
           />
-          <Button title="Login" isDarkMode={isDarkMode} onPress={submit} />
+          <Button
+            title="Login"
+            isDarkMode={isDarkMode}
+            onPress={submit}
+            isLoading={isLoading}
+          />
         </View>
 
         <View style={styles.signupContainer}>
           <Text style={[styles.text, { color: theme.text }]}>
             Don't have an account?
           </Text>
-          <CustomLink href="/signup" text="Sign up" />
+          <CustomLink href="/restore" text="Sign up" />
         </View>
       </View>
       <View style={styles.bottom}>

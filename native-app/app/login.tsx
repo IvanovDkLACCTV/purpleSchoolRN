@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, Image, Switch } from "react-native"
 import { router } from "expo-router"
 import { useAtom } from "jotai"
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins"
+import { AxiosError } from "axios"
 
 //inner imports
 import { Theme } from "../constants/Colors"
@@ -15,6 +16,10 @@ import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification
 import { useTheme } from "../shared/ThemeContext"
 import { CustomLink } from "../shared/CustomLink/CustomLink"
 import { loginAtom } from "../entities/auth/model/auth.state"
+
+interface ErrorResponse {
+  error: string
+}
 
 export default function Login() {
   const { isDarkMode, setIsDarkMode } = useTheme()
@@ -41,7 +46,21 @@ export default function Login() {
       return
     }
 
-    login({ email, password })
+    try {
+      await login({ email, password })
+    } catch (err) {
+      const axiosError = err as AxiosError<ErrorResponse>
+      // Handle server errors
+      if (axiosError.response) {
+        // The request was made and the server responded with a status code
+        setError(
+          axiosError.response.data.error || "An error occurred during login"
+        )
+      } else {
+        // The request was made but no response was received
+        setError("Network error, please try again later")
+      }
+    }
   }
 
   useEffect(() => {

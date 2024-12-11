@@ -9,6 +9,18 @@ export default function MyCourses() {
   const { isDarkMode, setIsDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
 
+  const styles = StyleSheet.create({
+    container: {
+      backgroundColor: theme.background,
+      justifyContent: "center",
+      flex: 1,
+      padding: 20,
+    },
+    bottom: {
+      marginTop: "auto",
+    },
+  })
+
   const logout = useSetAtom(logoutAtom)
   return (
     <View style={styles.container}>
@@ -25,15 +37,3 @@ export default function MyCourses() {
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: Theme.light.background,
-    justifyContent: "center",
-    flex: 1,
-    padding: 20,
-  },
-  bottom: {
-    marginTop: "auto",
-  },
-})

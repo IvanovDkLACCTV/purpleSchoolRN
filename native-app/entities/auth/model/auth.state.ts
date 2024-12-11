@@ -42,13 +42,14 @@ export const loginAtom = atom(
         error: null,
       })
     } catch (error) {
-      if (error instanceof AxiosError) {
-        set(authAtom, {
-          isLoading: false,
-          access_token: null,
-          error: error.response?.data.message,
-        })
-      }
+      const axiosError = error as AxiosError<ErrorResponse>
+      set(authAtom, {
+        isLoading: false,
+        access_token: null,
+        error:
+          axiosError.response?.data.error || "An error occurred during login",
+      })
+      throw axiosError
     }
   }
 )
@@ -57,4 +58,8 @@ export interface AuthState {
   access_token: string | null
   isLoading: boolean
   error: string | null
+}
+
+interface ErrorResponse {
+  error: string
 }

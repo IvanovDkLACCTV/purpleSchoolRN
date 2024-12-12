@@ -1,7 +1,8 @@
-import { Colors } from "../shared/tokens";
+import { Colors } from "../shared/tokens"
 export const Theme = {
   light: {
     background: Colors.backgroundColorLight,
+    drawerBackground: Colors.drawerBackgroundLight,
     text: Colors.textColorLight,
     tint: Colors.accentColorLight,
     headerText: Colors.headerTextColorLight,
@@ -14,6 +15,7 @@ export const Theme = {
   },
   dark: {
     background: Colors.black,
+    drawerBackground: Colors.drawerBackgroundDark,
     text: Colors.textColorDark,
     tint: Colors.primary,
     headerText: Colors.headerTextColorDark,
@@ -23,6 +25,6 @@ export const Theme = {
     preHover: Colors.primary,
     lighter: Colors.inputBackgroundColorDark,
     error: Colors.red,
-    gradientDarkPurple: Colors.gradientDarkPurple
+    gradientDarkPurple: Colors.gradientDarkPurple,
   },
-};
+}

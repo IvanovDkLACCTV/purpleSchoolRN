@@ -19,23 +19,25 @@ export const Colors = {
   preHover: "#A7E5DE",
   red: "#CC384E",
   tomato: "tomato",
-  gradientDarkPurple: "#572EA0"
-};
+  gradientDarkPurple: "#572EA0",
+  drawerBackgroundLight: "#BEEAE4",
+  drawerBackgroundDark: "#5A2EA6",
+}
 
 export const Gaps = {
   g8: 8,
   g16: 16,
   g50: 50,
-};
+}
 
 export const Radius = {
   r10: 10,
   r20: 20,
-};
+}
 
 export const FontSize = {
   f16: 16,
   f18: 18,
   f20: 20,
   f24: 24,
-};
+}

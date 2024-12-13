@@ -2,12 +2,12 @@ import { Redirect } from "expo-router"
 import { useAtomValue } from "jotai"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { Drawer } from "expo-router/drawer"
-import { Text } from "react-native"
 
 import { authAtom } from "../../entities/auth/model/auth.state"
 import { useTheme } from "../../shared/ThemeContext"
 import { Theme } from "../../constants/Colors"
 import { FontSize } from "../../shared/tokens"
+import { MenuButton } from "../../features/layout/ui/MenuButton/MenuButton"
 
 export default function AppLayout() {
   const { access_token } = useAtomValue(authAtom)
@@ -28,7 +28,7 @@ export default function AppLayout() {
             shadowOpacity: 0,
           },
           headerLeft: () => {
-            return <Text>Open/Close</Text>
+            return <MenuButton navigation={navigation} />
           },
           headerTintColor: theme.text,
           headerTitleStyle: {

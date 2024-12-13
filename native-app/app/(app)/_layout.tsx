@@ -8,6 +8,7 @@ import { useTheme } from "../../shared/ThemeContext"
 import { Theme } from "../../constants/Colors"
 import { FontSize } from "../../shared/tokens"
 import { MenuButton } from "../../features/layout/ui/MenuButton/MenuButton"
+import { CustomDrawer } from "../../entities/layout/ui/CustomDrawer/CustomDrawer"
 
 export default function AppLayout() {
   const { access_token } = useAtomValue(authAtom)
@@ -21,7 +22,7 @@ export default function AppLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
-        drawerContent={() => <></>}
+        drawerContent={(props) => <CustomDrawer {...props} />}
         screenOptions={({ navigation }) => ({
           headerStyle: {
             backgroundColor: theme.lighter,
@@ -39,9 +40,6 @@ export default function AppLayout() {
           },
           headerTitleAlign: "center",
           sceneContainerStyle: {
-            backgroundColor: theme.background,
-          },
-          drawerContentStyle: {
             backgroundColor: theme.background,
           },
         })}

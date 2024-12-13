@@ -21,6 +21,7 @@ export default function AppLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
+        drawerContent={() => <></>}
         screenOptions={({ navigation }) => ({
           headerStyle: {
             backgroundColor: theme.lighter,
@@ -38,6 +39,9 @@ export default function AppLayout() {
           },
           headerTitleAlign: "center",
           sceneContainerStyle: {
+            backgroundColor: theme.background,
+          },
+          drawerContentStyle: {
             backgroundColor: theme.background,
           },
         })}

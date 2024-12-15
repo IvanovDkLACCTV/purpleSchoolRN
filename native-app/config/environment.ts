@@ -15,7 +15,7 @@ const getEnvVars = () => {
       ...ENV.dev,
       apiUrl: Platform.select({
         ios: 'http://localhost:3000/api-v2',
-        android: 'http://192.168.1.143:3000/api-v2', // Special alias for Android emulator
+        android: 'http://192.168.3.12:3000/api-v2', // Special alias for Android emulator
         default: 'http://localhost:3000/api-v2',
       }),
     }

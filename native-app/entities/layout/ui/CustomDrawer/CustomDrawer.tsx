@@ -3,15 +3,25 @@ import {
   DrawerContentScrollView,
 } from "@react-navigation/drawer"
 import { StyleSheet, Text, View, Image } from "react-native"
+import { useAtom, useSetAtom } from "jotai"
 
 import { useTheme } from "../../../../shared/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
 import { CloseDrawer } from "../../../../features/layout/ui/CloseDrawer/CloseDrawer"
 import { CustomLink } from "../../../../shared/CustomLink/CustomLink"
+import { logoutAtom } from "../../../auth/model/auth.state"
+import { loadProfileAtom } from "../../../user/model/user.state"
+import { useEffect } from "react"
 
 export function CustomDrawer(props: DrawerContentComponentProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
+  const logout = useSetAtom(logoutAtom)
+  const [profile, loadProfile] = useAtom(loadProfileAtom)
+
+  useEffect(() => {
+    loadProfile()
+  }, [])
 
   const styles = StyleSheet.create({
     scrollView: {
@@ -28,6 +38,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
     },
     footer: {
       flexDirection: "row",
+      marginBottom: 20,
     },
   })
 
@@ -38,7 +49,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
     >
       <CloseDrawer {...props.navigation} />
       <View style={styles.content}>
-        <Text style={{ color: theme.text }}>Custom Drawer</Text>
+        <Text style={{ color: theme.text }}>{profile.profile?.name}</Text>
       </View>
       <View>
         <View style={styles.footer}>
@@ -48,7 +59,11 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
             resizeMode="contain"
           />
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <CustomLink text="Go back" href={"/login"} />
+            <CustomLink
+              text="Logout"
+              href={"/login"}
+              onPress={() => logout()}
+            />
             <Text
               style={{
                 fontSize: 32,

@@ -5,7 +5,7 @@ const ENV = {
     apiUrl: "http://localhost:3000/api-v2",
   },
   prod: {
-    apiUrl: "https://your-production-api.com/api-v2",
+    apiUrl: "https://localhost:3000/api-v2",
   },
 }
 

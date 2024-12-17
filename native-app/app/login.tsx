@@ -50,14 +50,11 @@ export default function Login() {
       await login({ email, password })
     } catch (err) {
       const axiosError = err as AxiosError<ErrorResponse>
-      // Handle server errors
       if (axiosError.response) {
-        // The request was made and the server responded with a status code
         setError(
           axiosError.response.data.error || "An error occurred during login"
         )
       } else {
-        // The request was made but no response was received
         setError("Network error, please try again later")
       }
     }

@@ -9,8 +9,8 @@ const users = [
   },
   {
     id: "2",
-    name: "Name",
-    surname: "Surname",
+    name: "Tony",
+    surname: "Stark",
     email: "user@mail.com",
     photo: "",
     password: "123456", // Для реального проекта хешируйте пароли

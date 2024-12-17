@@ -12,6 +12,7 @@ import { CustomLink } from "../../../../shared/CustomLink/CustomLink"
 import { logoutAtom } from "../../../auth/model/auth.state"
 import { loadProfileAtom } from "../../../user/model/user.state"
 import { useEffect } from "react"
+import { UserMenu } from "../../../user/ui/UserMenu/UserMenu"
 
 export function CustomDrawer(props: DrawerContentComponentProps) {
   const { isDarkMode } = useTheme()
@@ -49,8 +50,9 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
     >
       <CloseDrawer {...props.navigation} />
       <View style={styles.content}>
-        <Text style={{ color: theme.text }}>{profile.profile?.name}</Text>
+        <UserMenu user={profile.profile} />
       </View>
+
       <View>
         <View style={styles.footer}>
           <Image

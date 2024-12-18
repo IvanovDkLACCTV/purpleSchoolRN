@@ -18,9 +18,9 @@ export function UserMenu({ user }: { user: User | null }) {
       marginTop: 20,
     },
     image: {
-      width: 60,
-      height: 60,
-      borderRadius: 30,
+      width: 70,
+      height: 70,
+      borderRadius: 35,
     },
     names: {
       flexDirection: "row",

@@ -4,6 +4,7 @@ import {
 } from "@react-navigation/drawer"
 import { StyleSheet, Text, View, Image } from "react-native"
 import { useAtom, useSetAtom } from "jotai"
+import { useEffect } from "react"
 
 import { useTheme } from "../../../../shared/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
@@ -11,8 +12,23 @@ import { CloseDrawer } from "../../../../features/layout/ui/CloseDrawer/CloseDra
 import { CustomLink } from "../../../../shared/CustomLink/CustomLink"
 import { logoutAtom } from "../../../auth/model/auth.state"
 import { loadProfileAtom } from "../../../user/model/user.state"
-import { useEffect } from "react"
 import { UserMenu } from "../../../user/ui/UserMenu/UserMenu"
+import CoursesIcon from "../../../../assets/menu/courses"
+import ProfileIcon from "../../../../assets/menu/profile"
+import { MenuItem } from "../MenuItem/MenuItem"
+
+const MENU = [
+  {
+    text: "Courses",
+    icon: <CoursesIcon />,
+    path: "/(app)",
+  },
+  {
+    text: "Profile",
+    icon: <ProfileIcon />,
+    path: "/profile",
+  },
+]
 
 export function CustomDrawer(props: DrawerContentComponentProps) {
   const { isDarkMode } = useTheme()
@@ -51,6 +67,9 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
       <CloseDrawer {...props.navigation} />
       <View style={styles.content}>
         <UserMenu user={profile.profile} />
+        {MENU.map((menu) => (
+          <MenuItem key={menu.path} {...menu} navigation={props.navigation} />
+        ))}
       </View>
 
       <View>

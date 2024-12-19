@@ -34,9 +34,6 @@ export function MenuItem({
       gap: 10,
       padding: 10,
     },
-    button: {
-      opacity: clicked ? 0.5 : 1,
-    },
     item: {
       flexDirection: "row",
       gap: Gaps.g20,

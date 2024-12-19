@@ -26,7 +26,7 @@ const MENU = [
   {
     text: "Profile",
     icon: <ProfileIcon />,
-    path: "/profile",
+    path: "profile",
   },
 ]
 

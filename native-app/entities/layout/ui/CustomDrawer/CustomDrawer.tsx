@@ -21,7 +21,7 @@ const MENU = [
   {
     text: "Courses",
     icon: <CoursesIcon />,
-    path: "/(app)",
+    path: "index",
   },
   {
     text: "Profile",
@@ -68,7 +68,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
       <View style={styles.content}>
         <UserMenu user={profile.profile} />
         {MENU.map((menu) => (
-          <MenuItem key={menu.path} {...menu} navigation={props.navigation} />
+          <MenuItem key={menu.path} {...menu} drawer={props} />
         ))}
       </View>
 

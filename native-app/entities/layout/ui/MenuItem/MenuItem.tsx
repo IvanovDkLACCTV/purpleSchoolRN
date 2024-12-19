@@ -1,20 +1,24 @@
-import { DrawerNavigationHelpers } from "@react-navigation/drawer/lib/typescript/commonjs/src/types"
+import {
+  DrawerContentComponentProps,
+  DrawerNavigationHelpers,
+} from "@react-navigation/drawer/lib/typescript/commonjs/src/types"
 import { ReactNode, useState } from "react"
 import { Pressable, PressableProps, View, Text, StyleSheet } from "react-native"
 
 import { useTheme } from "../../../../shared/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
-import { opacity } from "react-native-reanimated/lib/typescript/Colors"
+import { FontSize, Gaps } from "../../../../shared/tokens"
+import { Fonts } from "../../../../constants/Fonts"
 
 interface MenuItemProps {
-  navigation: DrawerNavigationHelpers
+  drawer: DrawerContentComponentProps
   icon: ReactNode
   text: string
   path: string
 }
 
 export function MenuItem({
-  navigation,
+  drawer,
   icon,
   text,
   path,
@@ -24,7 +28,7 @@ export function MenuItem({
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
 
-  const syles = StyleSheet.create({
+  const styles = StyleSheet.create({
     container: {
       flexDirection: "column",
       gap: 10,
@@ -35,19 +39,34 @@ export function MenuItem({
     },
     item: {
       flexDirection: "row",
-      gap: 20,
+      gap: Gaps.g20,
+      paddingHorizontal: 24,
+      paddingVertical: 16,
+      alignItems: "center",
+      borderRightWidth: 5,
+    },
+    text: {
+      color: theme.text,
+      fontSize: FontSize.f16,
+      fontFamily: Fonts.fontFamily,
     },
   })
-
+  const isActive = drawer.state.routes[drawer.state.index].name === path
   return (
     <Pressable
       {...props}
-      onPress={() => navigation.navigate(path)}
+      onPress={() => drawer.navigation.navigate(path)}
       onPressIn={() => setClicked(true)}
       onPressOut={() => setClicked(false)}
     >
-      <View style={syles.item}>
-        {icon} <Text>{text}</Text>
+      <View
+        style={{
+          ...styles.item,
+          borderColor: clicked || isActive ? theme.preHover : "transparent",
+          backgroundColor: clicked || isActive ? theme.hover : "transparent",
+        }}
+      >
+        <Text>{icon}</Text> <Text style={styles.text}>{text}</Text>
       </View>
     </Pressable>
   )

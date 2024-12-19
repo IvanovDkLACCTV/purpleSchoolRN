@@ -16,6 +16,7 @@ export function UserMenu({ user }: { user: User | null }) {
       alignItems: "center",
       flexDirection: "column",
       marginTop: 20,
+      marginBottom: 40,
     },
     image: {
       width: 70,

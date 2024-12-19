@@ -44,6 +44,8 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
     scrollView: {
       flex: 1,
       backgroundColor: theme.background,
+      paddingStart: 0,
+      paddingEnd: 0,
     },
     logo: {
       width: 100,
@@ -72,29 +74,23 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
         ))}
       </View>
 
-      <View>
-        <View style={styles.footer}>
-          <Image
-            source={require("../../../../assets/icon.png")}
-            style={styles.logo}
-            resizeMode="contain"
-          />
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <CustomLink
-              text="Logout"
-              href={"/login"}
-              onPress={() => logout()}
-            />
-            <Text
-              style={{
-                fontSize: 32,
-                marginLeft: -16,
-                color: theme.tint,
-              }}
-            >
-              {"\u2936"}
-            </Text>
-          </View>
+      <View style={styles.footer}>
+        <Image
+          source={require("../../../../assets/icon.png")}
+          style={styles.logo}
+          resizeMode="contain"
+        />
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <CustomLink text="Logout" href={"/login"} onPress={() => logout()} />
+          <Text
+            style={{
+              fontSize: 32,
+              marginLeft: -16,
+              color: theme.tint,
+            }}
+          >
+            {"\u2936"}
+          </Text>
         </View>
       </View>
     </DrawerContentScrollView>

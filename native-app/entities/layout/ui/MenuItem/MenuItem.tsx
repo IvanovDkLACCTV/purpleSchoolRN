@@ -66,7 +66,10 @@ export function MenuItem({
           backgroundColor: clicked || isActive ? theme.hover : "transparent",
         }}
       >
-        <Text>{icon}</Text> <Text style={styles.text}>{text}</Text>
+        <>
+          {icon}
+          <Text style={styles.text}>{text}</Text>
+        </>
       </View>
     </Pressable>
   )

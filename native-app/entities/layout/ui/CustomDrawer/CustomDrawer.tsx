@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, Image } from "react-native"
 import { useAtom, useSetAtom } from "jotai"
 import { useEffect } from "react"
 
-import { useTheme } from "../../../../shared/ThemeContext"
+import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
 import { CloseDrawer } from "../../../../features/layout/ui/CloseDrawer/CloseDrawer"
 import { CustomLink } from "../../../../shared/CustomLink/CustomLink"

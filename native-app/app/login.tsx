@@ -1,6 +1,6 @@
 //outer imports
 import { useEffect, useState } from "react"
-import { StyleSheet, Text, View, Image, Switch } from "react-native"
+import { StyleSheet, Text, View, Image } from "react-native"
 import { router } from "expo-router"
 import { useAtom } from "jotai"
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins"
@@ -13,9 +13,10 @@ import { Input } from "../shared/Input/Input"
 import { Gaps, FontSize } from "../shared/tokens"
 import { Button } from "../shared/Button/Button"
 import { ErrorNotification } from "../shared/ErrorNotification/ErrorNotification"
-import { useTheme } from "../shared/ThemeContext"
+import { useTheme } from "../shared/ThemeSwitch/ThemeContext"
 import { CustomLink } from "../shared/CustomLink/CustomLink"
 import { loginAtom } from "../entities/auth/model/auth.state"
+import ThemeSwitch from "../shared/ThemeSwitch/ThemeSwitch"
 
 interface ErrorResponse {
   error: string
@@ -144,12 +145,7 @@ export default function Login() {
         </View>
       </View>
       <View style={styles.bottom}>
-        <Switch
-          value={isDarkMode}
-          onValueChange={setIsDarkMode}
-          thumbColor={theme.tint}
-          trackColor={{ false: theme.lighter, true: theme.lighter }}
-        />
+        <ThemeSwitch />
       </View>
     </View>
   )

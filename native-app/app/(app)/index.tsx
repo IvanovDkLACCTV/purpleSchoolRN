@@ -1,12 +1,13 @@
-import { Text, View, StyleSheet, Switch } from "react-native"
+import { Text, View, StyleSheet } from "react-native"
 import { Button } from "../../shared/Button/Button"
 import { useSetAtom } from "jotai"
 import { logoutAtom } from "../../entities/auth/model/auth.state"
-import { useTheme } from "../../shared/ThemeContext"
+import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
+import ThemeSwitch from "../../shared/ThemeSwitch/ThemeSwitch"
 
 export default function MyCourses() {
-  const { isDarkMode, setIsDarkMode } = useTheme()
+  const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
 
   const styles = StyleSheet.create({
@@ -27,12 +28,7 @@ export default function MyCourses() {
       <Text style={{ color: theme.text }}>My Courses</Text>
       <Button title="Logout" onPress={logout} isDarkMode={isDarkMode} />
       <View style={styles.bottom}>
-        <Switch
-          value={isDarkMode}
-          onValueChange={setIsDarkMode}
-          thumbColor={theme.tint}
-          trackColor={{ false: theme.lighter, true: theme.lighter }}
-        />
+        <ThemeSwitch />
       </View>
     </View>
   )

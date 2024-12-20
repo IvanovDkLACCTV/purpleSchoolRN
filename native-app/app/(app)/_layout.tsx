@@ -4,7 +4,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { Drawer } from "expo-router/drawer"
 
 import { authAtom } from "../../entities/auth/model/auth.state"
-import { useTheme } from "../../shared/ThemeContext"
+import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
 import { FontSize } from "../../shared/tokens"
 import { MenuButton } from "../../features/layout/ui/MenuButton/MenuButton"

@@ -5,7 +5,7 @@ import {
 import { ReactNode, useState } from "react"
 import { Pressable, PressableProps, View, Text, StyleSheet } from "react-native"
 
-import { useTheme } from "../../../../shared/ThemeContext"
+import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
 import { FontSize, Gaps } from "../../../../shared/tokens"
 import { Fonts } from "../../../../constants/Fonts"

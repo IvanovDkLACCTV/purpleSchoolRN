@@ -2,7 +2,7 @@ import { Image, StyleSheet, Text, View } from "react-native"
 import { User } from "../../model/user.model"
 import { FontSize, Gaps } from "../../../../shared/tokens"
 import { Fonts } from "../../../../constants/Fonts"
-import { useTheme } from "../../../../shared/ThemeContext"
+import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
 
 export function UserMenu({ user }: { user: User | null }) {

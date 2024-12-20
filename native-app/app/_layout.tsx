@@ -1,6 +1,6 @@
 import { Stack, SplashScreen } from "expo-router"
 import { Theme } from "../constants/Colors"
-import { ThemeProvider, useTheme } from "../shared/ThemeContext"
+import { ThemeProvider, useTheme } from "../shared/ThemeSwitch/ThemeContext"
 import { LinearGradient } from "expo-linear-gradient"
 import { View, StatusBar } from "react-native"
 import { SafeAreaProvider } from "react-native-safe-area-context"

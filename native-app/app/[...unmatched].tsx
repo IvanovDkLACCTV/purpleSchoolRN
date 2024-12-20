@@ -1,45 +1,46 @@
-import { Image, StyleSheet, Text, View, Switch } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Theme } from '../constants/Colors';
-import { FontSize, Gaps } from '../shared/tokens';
-import { useTheme } from '../shared/ThemeContext';
-import { CustomLink } from '../shared/CustomLink/CustomLink';
+import { Image, StyleSheet, Text, View } from "react-native"
+import { SafeAreaView } from "react-native-safe-area-context"
+import { Theme } from "../constants/Colors"
+import { FontSize, Gaps } from "../shared/tokens"
+import { useTheme } from "../shared/ThemeSwitch/ThemeContext"
+import { CustomLink } from "../shared/CustomLink/CustomLink"
+import ThemeSwitch from "../shared/ThemeSwitch/ThemeSwitch"
+import { Width } from "../constants/Sizes"
 
 export default function UnmatchedCustom() {
-  const { isDarkMode, setIsDarkMode } = useTheme();
-  const theme = isDarkMode ? Theme.dark : Theme.light;
+  const { isDarkMode } = useTheme()
+  const theme = isDarkMode ? Theme.dark : Theme.light
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: theme.background }]}>
+    <SafeAreaView
+      style={[styles.container, { backgroundColor: theme.background }]}
+    >
       <View style={styles.content}>
         <Image
           style={styles.image}
-          source={require('../assets/images/unmatched.png')}
+          source={require("../assets/images/unmatched.png")}
           resizeMode="contain"
         />
-        <Text style={[styles.text, { color: theme.text }]}>Wow, dude... Something went wrong. Try to get back to the &nbsp; 
-          <CustomLink href="/" text='Homepage' />
+        <Text style={[styles.text, { color: theme.text }]}>
+          Wow, dude... Something went wrong. Try to get back to the &nbsp;
+          <CustomLink href="/" text="Homepage" />
         </Text>
       </View>
-      <Switch
-        style={styles.themeSwitch}
-        value={isDarkMode}
-        onValueChange={setIsDarkMode}
-        thumbColor={theme.tint}
-        trackColor={{ false: theme.lighter, true: theme.lighter }}
-      />
+      <View style={styles.bottom}>
+        <ThemeSwitch />
+      </View>
     </SafeAreaView>
-  );
+  )
 }
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'center',
+    justifyContent: "center",
     flex: 1,
     padding: 55,
   },
   content: {
-    alignItems: 'center',
+    alignItems: "center",
     gap: Gaps.g50,
   },
   image: {
@@ -48,19 +49,13 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: FontSize.f18,
-    textAlign: 'center',
-    fontFamily: 'Poppins',
+    textAlign: "center",
+    fontFamily: "Poppins",
   },
-  link: {
-    padding: 16,
+  bottom: {
+    position: "absolute",
+    bottom: Width * 0.1,
+    right: Width * 0.1,
+    zIndex: 1,
   },
-  linkText: {
-    fontSize: FontSize.f18,
-    fontFamily: 'Poppins',
-  },
-  themeSwitch: {
-    position: 'absolute',
-    bottom: 60,
-    right: 20,
-  },
-});
+})

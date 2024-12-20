@@ -1,9 +1,10 @@
-import { Text, View, StyleSheet, Switch } from "react-native"
-import { useTheme } from "../../shared/ThemeContext"
+import { Text, View, StyleSheet } from "react-native"
+import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
+import ThemeSwitch from "../../shared/ThemeSwitch/ThemeSwitch"
 
 export default function Profile() {
-  const { isDarkMode, setIsDarkMode } = useTheme()
+  const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
 
   const styles = StyleSheet.create({
@@ -22,12 +23,7 @@ export default function Profile() {
     <View style={styles.container}>
       <Text style={{ color: theme.text }}>My Profile</Text>
       <View style={styles.bottom}>
-        <Switch
-          value={isDarkMode}
-          onValueChange={setIsDarkMode}
-          thumbColor={theme.tint}
-          trackColor={{ false: theme.lighter, true: theme.lighter }}
-        />
+        <ThemeSwitch />
       </View>
     </View>
   )

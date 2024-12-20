@@ -25,7 +25,6 @@ export default function MyCourses() {
   const logout = useSetAtom(logoutAtom)
   return (
     <View style={styles.container}>
-      <Text style={{ color: theme.text }}>My Courses</Text>
       <Button title="Logout" onPress={logout} isDarkMode={isDarkMode} />
       <View style={styles.bottom}>
         <ThemeSwitch />

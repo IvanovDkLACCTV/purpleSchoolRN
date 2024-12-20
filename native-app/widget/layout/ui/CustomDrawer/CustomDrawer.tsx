@@ -10,12 +10,12 @@ import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
 import { CloseDrawer } from "../../../../features/layout/ui/CloseDrawer/CloseDrawer"
 import { CustomLink } from "../../../../shared/CustomLink/CustomLink"
-import { logoutAtom } from "../../../auth/model/auth.state"
-import { loadProfileAtom } from "../../../user/model/user.state"
-import { UserMenu } from "../../../user/ui/UserMenu/UserMenu"
+import { logoutAtom } from "../../../../entities/auth/model/auth.state"
+import { loadProfileAtom } from "../../../../entities/user/model/user.state"
+import { UserMenu } from "../../../../entities/user/ui/UserMenu/UserMenu"
 import CoursesIcon from "../../../../assets/menu/courses"
 import ProfileIcon from "../../../../assets/menu/profile"
-import { MenuItem } from "../MenuItem/MenuItem"
+import { MenuItem } from "../../../../entities/layout/ui/MenuItem/MenuItem"
 
 const MENU = [
   {

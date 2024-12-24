@@ -10,7 +10,7 @@ import {
 import UploadIcon from "../../assets/icons/upload"
 import { Theme } from "../../constants/Colors"
 import { useTheme } from "../ThemeSwitch/ThemeContext"
-import { FontSize, Gaps } from "../tokens"
+import { FontSize, Gaps, Radius } from "../tokens"
 import { Fonts } from "../../constants/Fonts"
 
 interface ImageUploaderProps {
@@ -110,10 +110,14 @@ export function ImageUploader({}: ImageUploaderProps) {
     uploader: {
       flexDirection: "row",
       gap: Gaps.g8,
+      backgroundColor: theme.inputBackground,
+      borderRadius: Radius.r10,
+      paddingHorizontal: 20,
+      paddingVertical: 17,
     },
     text: {
       color: theme.text,
-      fontSize: FontSize.f16,
+      fontSize: FontSize.f14,
       fontFamily: Fonts.fontFamily,
     },
   })

@@ -4,24 +4,22 @@ import { FontSize, Gaps } from "../../../../shared/tokens"
 import { Fonts } from "../../../../constants/Fonts"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
+import UserAvatar from "../UserAvatar/UserAvatar"
 
 export function UserMenu({ user }: { user: User | null }) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
+
   if (!user) {
-    return
+    return null
   }
+
   const styles = StyleSheet.create({
-    contailer: {
+    container: {
       alignItems: "center",
       flexDirection: "column",
       marginTop: 20,
       marginBottom: 40,
-    },
-    image: {
-      width: 70,
-      height: 70,
-      borderRadius: 35,
     },
     names: {
       flexDirection: "row",
@@ -37,14 +35,8 @@ export function UserMenu({ user }: { user: User | null }) {
   })
 
   return (
-    <View style={styles.contailer}>
-      <View>
-        {user.photo ? (
-          <Image style={styles.image} source={{ uri: user.photo }} />
-        ) : (
-          <Image source={require("../../../../assets/images/avatar.png")} />
-        )}
-      </View>
+    <View style={styles.container}>
+      <UserAvatar user={user} />
       <View style={styles.names}>
         <Text style={styles.name}>{user.name}</Text>
         <Text style={styles.name}>{user.surname}</Text>

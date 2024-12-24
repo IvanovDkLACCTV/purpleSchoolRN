@@ -3,6 +3,7 @@ import ThemeSwitch from "../../shared/ThemeSwitch/ThemeSwitch"
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
 import { ImageUploader } from "../../shared/ImageUploader/ImageUploader"
+import UserAvatar from "../../entities/user/ui/UserAvatar/UserAvatar"
 
 export default function Profile() {
   const { isDarkMode } = useTheme()
@@ -24,6 +25,7 @@ export default function Profile() {
 
   return (
     <View style={styles.container}>
+      <UserAvatar user={null} />
       <ImageUploader onUpload={() => {}} />
       <View style={styles.bottom}>
         <ThemeSwitch />

@@ -1,4 +1,4 @@
-import { Pressable, Alert } from "react-native"
+import { Pressable, Alert, View, Text, StyleSheet } from "react-native"
 import { useState } from "react"
 import {
   launchImageLibraryAsync,
@@ -7,12 +7,19 @@ import {
   useMediaLibraryPermissions,
   useCameraPermissions,
 } from "expo-image-picker"
+import UploadIcon from "../../assets/icons/upload"
+import { Theme } from "../../constants/Colors"
+import { useTheme } from "../ThemeSwitch/ThemeContext"
+import { FontSize, Gaps } from "../tokens"
+import { Fonts } from "../../constants/Fonts"
 
 interface ImageUploaderProps {
   onUpload: (uri: string) => void
 }
 
 export function ImageUploader({}: ImageUploaderProps) {
+  const { isDarkMode } = useTheme()
+  const theme = isDarkMode ? Theme.dark : Theme.light
   // image picker
   const [image, setImage] = useState<string | null>(null)
   const [mediaLibraryPermission, requestMediaLibraryPermission] =
@@ -99,9 +106,24 @@ export function ImageUploader({}: ImageUploaderProps) {
     }
   }
 
+  const styles = StyleSheet.create({
+    uploader: {
+      flexDirection: "row",
+      gap: Gaps.g8,
+    },
+    text: {
+      color: theme.text,
+      fontSize: FontSize.f16,
+      fontFamily: Fonts.fontFamily,
+    },
+  })
+
   return (
-    <Pressable>
-      {/* Add buttons or UI elements to trigger takePhoto and pickImage */}
+    <Pressable onPress={pickImage}>
+      <View style={styles.uploader}>
+        <UploadIcon />
+        <Text style={styles.text}>Upload Image</Text>
+      </View>
     </Pressable>
   )
 }

@@ -17,7 +17,7 @@ interface ImageUploaderProps {
   onUpload: (uri: string) => void
 }
 
-export function ImageUploader({}: ImageUploaderProps) {
+export function ImageUploader({ onUpload }: ImageUploaderProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
   // image picker
@@ -103,6 +103,7 @@ export function ImageUploader({}: ImageUploaderProps) {
     })
     if (!result.canceled) {
       setImage(result.assets[0].uri)
+      onUpload(result.assets[0].uri)
     }
   }
 
@@ -114,6 +115,7 @@ export function ImageUploader({}: ImageUploaderProps) {
       borderRadius: Radius.r10,
       paddingHorizontal: 20,
       paddingVertical: 17,
+      alignItems: "center",
     },
     text: {
       color: theme.text,

@@ -4,7 +4,7 @@ import {
 } from "@react-navigation/drawer"
 import { StyleSheet, Text, View, Image } from "react-native"
 import { useAtom, useSetAtom } from "jotai"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
@@ -35,6 +35,7 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
   const theme = isDarkMode ? Theme.dark : Theme.light
   const logout = useSetAtom(logoutAtom)
   const [profile, loadProfile] = useAtom(loadProfileAtom)
+  const [image, setImage] = useState<string | null>(null)
 
   useEffect(() => {
     loadProfile()
@@ -68,7 +69,10 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
     >
       <CloseDrawer {...props.navigation} />
       <View style={styles.content}>
-        <UserMenu user={profile.profile} />
+        <UserMenu
+          user={profile.profile}
+          image={profile.profile?.photo || image}
+        />
         {MENU.map((menu) => (
           <MenuItem key={menu.path} {...menu} drawer={props} />
         ))}

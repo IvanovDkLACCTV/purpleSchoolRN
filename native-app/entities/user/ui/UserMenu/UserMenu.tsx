@@ -1,12 +1,18 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View } from "react-native"
 import { User } from "../../model/user.model"
 import { FontSize, Gaps } from "../../../../shared/tokens"
 import { Fonts } from "../../../../constants/Fonts"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
 import UserAvatar from "../UserAvatar/UserAvatar"
+import { useState } from "react"
 
-export function UserMenu({ user }: { user: User | null }) {
+interface UserMenuProps {
+  user: User | null
+  image: string | null
+}
+
+export function UserMenu({ user, image }: UserMenuProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
 
@@ -36,7 +42,7 @@ export function UserMenu({ user }: { user: User | null }) {
 
   return (
     <View style={styles.container}>
-      <UserAvatar user={user} />
+      <UserAvatar user={user} image={image} />
       <View style={styles.names}>
         <Text style={styles.name}>{user.name}</Text>
         <Text style={styles.name}>{user.surname}</Text>

@@ -1,17 +1,17 @@
-import React from "react"
+import React, { useState } from "react"
 import { Image, View, StyleSheet } from "react-native"
 import { User } from "../../model/user.model"
-import { Gaps } from "../../../../shared/tokens"
 
 interface UserAvatarProps {
   user: User | null
+  image: string | null
 }
 
-const UserAvatar: React.FC<UserAvatarProps> = ({ user }) => {
+const UserAvatar: React.FC<UserAvatarProps> = ({ user, image }) => {
   return (
     <View>
-      {user?.photo ? (
-        <Image style={styles.image} source={{ uri: user.photo }} />
+      {image ? (
+        <Image style={styles.image} source={{ uri: image }} />
       ) : (
         <Image source={require("../../../../assets/images/avatar.png")} />
       )}

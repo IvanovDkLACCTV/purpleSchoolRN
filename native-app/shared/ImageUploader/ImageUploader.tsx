@@ -117,7 +117,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
     const formData = new FormData()
     formData.append("files", {
       uri,
-      fileName,
+      name: fileName,
       type: "image/jpeg",
     })
     try {

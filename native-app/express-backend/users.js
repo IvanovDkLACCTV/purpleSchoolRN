@@ -12,7 +12,7 @@ const users = [
     name: "Tony",
     surname: "Stark",
     email: "user@mail.com",
-    photo: "",
+    photo: "./uploads/tony.jpeg",
     password: "123456", // Для реального проекта хешируйте пароли
   },
 ]

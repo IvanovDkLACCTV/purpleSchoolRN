@@ -36,7 +36,7 @@ export default function Profile() {
     <View style={styles.container}>
       <View style={styles.header}>
         <UserAvatar user={null} image={image} />
-        <ImageUploader onUpload={setImage} />
+        <ImageUploader onUpload={(uri) => setImage(uri)} />
       </View>
       <View style={styles.bottom}>
         <ThemeSwitch />

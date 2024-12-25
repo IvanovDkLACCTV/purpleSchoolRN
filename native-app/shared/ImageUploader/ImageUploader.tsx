@@ -127,7 +127,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
         },
       })
       console.log(data)
-      //onUpload(data)
+      onUpload(data.file.path)
     } catch (error) {
       if (error instanceof AxiosError) {
         console.error(error)

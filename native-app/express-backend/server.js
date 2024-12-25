@@ -45,7 +45,9 @@ app.post("/api-v2/files/upload-image", upload.single("files"), (req, res) => {
   // You can access the file information via req.file
   return res.json({
     message: "File uploaded successfully",
-    file: req.file,
+    file: {
+      path: `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`,
+    },
   })
 })
 

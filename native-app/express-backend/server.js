@@ -3,15 +3,30 @@ const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
 const users = require("./users")
 const cors = require("cors")
+const multer = require("multer")
+const path = require("path")
+const fs = require("fs")
 
 const app = express()
 const port = 3030
 const secretKey = "a-very-secret-key-123456"
 
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/") // Specify the folder to save the uploaded files
+  },
+  filename: (req, file, cb) => {
+    cb(null, Date.now() + path.extname(file.originalname)) // Append timestamp to the file name
+  },
+})
+
+const upload = multer({ storage })
+
 app.use(bodyParser.json())
 app.use(
   cors({
-    origin: "http://localhost:19006",
+    origin: "http://localhost:3030",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -20,6 +35,18 @@ app.use(
 // Log all incoming requests
 app.use((req, res, next) => {
   next()
+})
+
+// Image upload endpoint
+app.post("/api-v2/files/upload-image", upload.single("files"), (req, res) => {
+  if (!req.file) {
+    return res.status(400).json({ error: "No file uploaded." })
+  }
+  // You can access the file information via req.file
+  return res.json({
+    message: "File uploaded successfully",
+    file: req.file,
+  })
 })
 
 app.post("/api-v2/auth/login", (req, res) => {
@@ -77,6 +104,10 @@ app.get("/api-v2/user/profile", (req, res) => {
     })
   })
 })
+
+if (!fs.existsSync("uploads")) {
+  fs.mkdirSync("uploads")
+}
 
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`)

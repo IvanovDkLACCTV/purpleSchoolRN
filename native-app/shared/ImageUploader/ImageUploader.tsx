@@ -7,11 +7,15 @@ import {
   useMediaLibraryPermissions,
   useCameraPermissions,
 } from "expo-image-picker"
+import FormData from "form-data"
+import axios, { AxiosError } from "axios"
+
 import UploadIcon from "../../assets/icons/upload"
 import { Theme } from "../../constants/Colors"
 import { useTheme } from "../ThemeSwitch/ThemeContext"
 import { FontSize, Gaps, Radius } from "../tokens"
 import { Fonts } from "../../constants/Fonts"
+import { FILE_API } from "../api"
 
 interface ImageUploaderProps {
   onUpload: (uri: string) => void
@@ -101,12 +105,38 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
       aspect: [1, 1],
       quality: 1,
     })
-    if (!result.canceled) {
-      setImage(result.assets[0].uri)
-      onUpload(result.assets[0].uri)
+    if (!result.assets) {
+      return
+    }
+    uploadToServer(result.assets[0].uri, result.assets[0].fileName ?? "")
+    onUpload(result.assets[0].uri)
+  }
+
+  //uploading on server
+  const uploadToServer = async (uri: string, fileName: string) => {
+    const formData = new FormData()
+    formData.append("files", {
+      uri,
+      fileName,
+      type: "image/jpeg",
+    })
+    try {
+      const { data } = await axios.post(FILE_API.uploadImage, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      })
+      console.log(data)
+      //onUpload(data)
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        console.error(error)
+      }
+      return null
     }
   }
 
+  //styling
   const styles = StyleSheet.create({
     uploader: {
       flexDirection: "row",

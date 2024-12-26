@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     cb(null, "uploads/") // Specify the folder to save the uploaded files
   },
   filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname)) // Append timestamp to the file name
+    cb(null, Date.now() + path.extname(file.originalname))
   },
 })
 
@@ -26,14 +26,14 @@ const upload = multer({ storage })
 app.use(bodyParser.json())
 app.use(
   cors({
-    origin: "http://localhost:3030", // Убедитесь, что URL совпадает с вашим фронтендом
+    origin: "http://localhost:3030",
     methods: ["GET", "POST"],
     credentials: true,
   })
 )
 
 // Serve static files from the uploads folder
-app.use("./uploads", express.static(path.join(__dirname, "uploads")))
+app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
 // Log all incoming requests (debugging purpose)
 app.use((req, res, next) => {
@@ -111,12 +111,11 @@ app.get("/api-v2/user/profile", (req, res) => {
       name: user.name,
       surname: user.surname,
       email: user.email,
-      photo: user.photo, // Возвращаем путь к аватару
+      photo: user.photo,
     })
   })
 })
 
-// Create uploads folder if it doesn't exist
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads")
 }

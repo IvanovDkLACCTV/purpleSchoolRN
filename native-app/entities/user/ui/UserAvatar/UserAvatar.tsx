@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Image, View, StyleSheet } from "react-native"
 import { User } from "../../model/user.model"
 
@@ -11,13 +11,22 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ user, image }) => {
   const defaultAvatar = require("../../../../assets/images/avatar.png")
   const [loadedImage, setLoadedImage] = useState<string | null>(image)
 
+  useEffect(() => {
+    setLoadedImage(image)
+  }, [image])
+
+  const cacheBustingUrl = loadedImage ? `${loadedImage}?t=${Date.now()}` : null
+
   return (
     <View>
-      {loadedImage ? (
+      {cacheBustingUrl ? (
         <Image
           style={styles.image}
-          source={{ uri: loadedImage }}
-          onError={() => setLoadedImage(null)} // Устанавливаем null при ошибке загрузки
+          source={{ uri: cacheBustingUrl }}
+          onError={(e) => {
+            console.error("Image load error:", e.nativeEvent, cacheBustingUrl)
+            setLoadedImage(null)
+          }}
         />
       ) : (
         <Image style={styles.image} source={defaultAvatar} />

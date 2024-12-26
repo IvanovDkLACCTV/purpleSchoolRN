@@ -6,8 +6,13 @@ import { ImageUploader } from "../../shared/ImageUploader/ImageUploader"
 import UserAvatar from "../../entities/user/ui/UserAvatar/UserAvatar"
 import { Gaps } from "../../shared/tokens"
 import { useState } from "react"
+import { User } from "../../entities/user/model/user.model"
 
-export default function Profile() {
+interface UserMenuProps {
+  user: User | null
+}
+
+export default function Profile({ user }: UserMenuProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
   const [image, setImage] = useState<string | null>(null)
@@ -35,8 +40,13 @@ export default function Profile() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <UserAvatar user={null} image={image} />
-        <ImageUploader onUpload={(uri) => setImage(uri)} />
+        <UserAvatar user={user} image={image} />
+        <ImageUploader
+          onUpload={(uri) => {
+            console.log("Uploaded image URI:", uri)
+            setImage(uri)
+          }}
+        />
       </View>
       <View style={styles.bottom}>
         <ThemeSwitch />

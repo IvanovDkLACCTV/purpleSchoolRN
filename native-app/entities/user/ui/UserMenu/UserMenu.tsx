@@ -1,11 +1,12 @@
+import { useEffect } from "react"
 import { StyleSheet, Text, View } from "react-native"
+
 import { User } from "../../model/user.model"
 import { FontSize, Gaps } from "../../../../shared/tokens"
 import { Fonts } from "../../../../constants/Fonts"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
 import UserAvatar from "../UserAvatar/UserAvatar"
-import { useState } from "react"
 
 interface UserMenuProps {
   user: User | null
@@ -39,6 +40,11 @@ export function UserMenu({ user, image }: UserMenuProps) {
       color: theme.text,
     },
   })
+
+  // Log the image prop to check if it updates
+  useEffect(() => {
+    console.log("Updated image in UserMenu:", image)
+  }, [image])
 
   return (
     <View style={styles.container}>

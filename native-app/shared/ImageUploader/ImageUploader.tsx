@@ -74,7 +74,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
       return false
     }
 
-    return false
+    return true
   }
 
   const takePhoto = async () => {

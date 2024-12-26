@@ -99,7 +99,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
     if (!isPermissionGranted) {
       return
     }
-    let result = await launchImageLibraryAsync({
+    const result = await launchImageLibraryAsync({
       mediaTypes: "images",
       allowsEditing: true,
       aspect: [1, 1],
@@ -108,8 +108,9 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
     if (!result.assets) {
       return
     }
-    uploadToServer(result.assets[0].uri, result.assets[0].fileName ?? "")
-    onUpload(result.assets[0].uri)
+    const asset = result.assets[0]
+    const name = asset.fileName ?? `image_${Date.now()}.jpg` // резервное имя
+    await uploadToServer(asset.uri, name)
   }
 
   //uploading on server
@@ -127,12 +128,10 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
         },
       })
       console.log(data)
-      onUpload(data.file.path)
+      setImage(data.file.path) // обновляем состояние только с данными сервера
+      onUpload(data.file.path) // передаём путь выше
     } catch (error) {
-      if (error instanceof AxiosError) {
-        console.error(error)
-      }
-      return null
+      console.error(error)
     }
   }
 

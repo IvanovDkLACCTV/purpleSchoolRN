@@ -26,14 +26,18 @@ const upload = multer({ storage })
 app.use(bodyParser.json())
 app.use(
   cors({
-    origin: "http://localhost:3030",
+    origin: "http://localhost:3030", // Убедитесь, что URL совпадает с вашим фронтендом
     methods: ["GET", "POST"],
     credentials: true,
   })
 )
 
-// Log all incoming requests
+// Serve static files from the uploads folder
+app.use("./uploads", express.static(path.join(__dirname, "uploads")))
+
+// Log all incoming requests (debugging purpose)
 app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`)
   next()
 })
 
@@ -42,15 +46,18 @@ app.post("/api-v2/files/upload-image", upload.single("files"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({ error: "No file uploaded." })
   }
-  // You can access the file information via req.file
+
+  const filePath = `/uploads/${req.file.filename}`
+
   return res.json({
     message: "File uploaded successfully",
     file: {
-      path: `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`,
+      path: `${req.protocol}://${req.get("host")}${filePath}`,
     },
   })
 })
 
+// Login endpoint
 app.post("/api-v2/auth/login", (req, res) => {
   const { email, password } = req.body
 
@@ -82,6 +89,7 @@ app.post("/api-v2/auth/login", (req, res) => {
   return res.json({ access_token: token })
 })
 
+// User profile endpoint
 app.get("/api-v2/user/profile", (req, res) => {
   const token = req.headers.authorization?.split(" ")[1]
   if (!token) {
@@ -103,10 +111,12 @@ app.get("/api-v2/user/profile", (req, res) => {
       name: user.name,
       surname: user.surname,
       email: user.email,
+      photo: user.photo, // Возвращаем путь к аватару
     })
   })
 })
 
+// Create uploads folder if it doesn't exist
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads")
 }

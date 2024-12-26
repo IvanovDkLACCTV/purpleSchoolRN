@@ -8,12 +8,18 @@ interface UserAvatarProps {
 }
 
 const UserAvatar: React.FC<UserAvatarProps> = ({ user, image }) => {
+  const defaultAvatar = require("../../../../assets/images/avatar.png")
+  const [loadedImage, setLoadedImage] = useState<string | null>(image)
   return (
     <View>
-      {image ? (
-        <Image style={styles.image} source={{ uri: image }} />
+      {loadedImage ? (
+        <Image
+          style={styles.image}
+          source={{ uri: loadedImage }}
+          onError={() => setLoadedImage(null)}
+        />
       ) : (
-        <Image source={require("../../../../assets/images/avatar.png")} />
+        <Image source={defaultAvatar} />
       )}
     </View>
   )

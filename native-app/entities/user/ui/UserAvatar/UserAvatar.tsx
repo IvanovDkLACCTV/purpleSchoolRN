@@ -9,13 +9,20 @@ interface UserAvatarProps {
 
 const UserAvatar: React.FC<UserAvatarProps> = ({ user, image }) => {
   const defaultAvatar = require("../../../../assets/images/avatar.png")
-  const [loadedImage, setLoadedImage] = useState<string | null>(image)
+  const [loadedImage, setLoadedImage] = useState<string | null>(image || null)
 
   useEffect(() => {
-    setLoadedImage(image)
+    if (image) {
+      setLoadedImage(image) // Устанавливаем изображение только если оно не null
+    }
   }, [image])
 
+  useEffect(() => {
+    console.log("Loaded image:", loadedImage)
+  }, [loadedImage])
+
   const cacheBustingUrl = loadedImage ? `${loadedImage}?t=${Date.now()}` : null
+  console.log("Image URL:", cacheBustingUrl)
 
   return (
     <View>
@@ -40,6 +47,7 @@ const styles = StyleSheet.create({
     width: 70,
     height: 70,
     borderRadius: 35,
+    resizeMode: "cover",
   },
 })
 

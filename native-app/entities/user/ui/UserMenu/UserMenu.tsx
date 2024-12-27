@@ -17,6 +17,11 @@ export function UserMenu({ user, image }: UserMenuProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
 
+  // Log the image prop to check if it updates
+  useEffect(() => {
+    console.log("Updated image in UserMenu:", image)
+  }, [image])
+
   if (!user) {
     return null
   }
@@ -40,11 +45,6 @@ export function UserMenu({ user, image }: UserMenuProps) {
       color: theme.text,
     },
   })
-
-  // Log the image prop to check if it updates
-  useEffect(() => {
-    console.log("Updated image in UserMenu:", image)
-  }, [image])
 
   return (
     <View style={styles.container}>

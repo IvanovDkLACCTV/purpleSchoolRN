@@ -5,15 +5,15 @@ const users = [
     surname: "Doe",
     email: "john.doe@example.com",
     photo: "",
-    password: "password123", // Для реального проекта хешируйте пароли
+    password: "password123",
   },
   {
     id: "2",
     name: "Tony",
     surname: "Stark",
     email: "user@mail.com",
-    photo: "./uploads/tony.jpeg",
-    password: "123456", // Для реального проекта хешируйте пароли
+    photo: "http://192.168.1.143:3030/uploads/tony.jpeg", // Абсолютный путь
+    password: "123456",
   },
 ]
 

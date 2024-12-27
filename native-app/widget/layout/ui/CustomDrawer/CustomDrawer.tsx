@@ -30,12 +30,15 @@ const MENU = [
   },
 ]
 
-export function CustomDrawer(props: DrawerContentComponentProps) {
+interface CustomDrawerProps extends DrawerContentComponentProps {
+  image: string | null
+}
+
+export function CustomDrawer({ image, ...props }: CustomDrawerProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
   const logout = useSetAtom(logoutAtom)
   const [profile, loadProfile] = useAtom(loadProfileAtom)
-  const [image, setImage] = useState<string | null>(null)
 
   useEffect(() => {
     loadProfile()
@@ -71,7 +74,13 @@ export function CustomDrawer(props: DrawerContentComponentProps) {
       <View style={styles.content}>
         <UserMenu
           user={profile.profile}
-          image={profile.profile?.photo || image}
+          image={
+            image
+              ? image
+              : profile.profile?.photo
+              ? profile.profile.photo
+              : null
+          }
         />
         {MENU.map((menu) => (
           <MenuItem key={menu.path} {...menu} drawer={props} />

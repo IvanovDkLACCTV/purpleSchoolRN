@@ -15,7 +15,7 @@ interface UserMenuProps {
 export default function Profile({ user }: UserMenuProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
-  const [image, setImage] = useState<string | null>(null)
+  const [image, setLocalImage] = useState<string | null>(null)
 
   const styles = StyleSheet.create({
     container: {
@@ -40,11 +40,11 @@ export default function Profile({ user }: UserMenuProps) {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <UserAvatar user={user} image={image} />
+        <UserAvatar user={user} image={image || user?.photo || null} />
         <ImageUploader
           onUpload={(uri) => {
             console.log("Uploaded image URI:", uri)
-            setImage(uri)
+            setLocalImage(uri) // Сохраняем загруженный URL
           }}
         />
       </View>

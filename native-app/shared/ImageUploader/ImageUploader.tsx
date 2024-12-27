@@ -157,7 +157,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
     <Pressable onPress={pickImage}>
       <View style={styles.uploader}>
         <UploadIcon />
-        <Text style={styles.text}>Upload Image</Text>
+        <Text style={styles.text}>Upload a new image</Text>
       </View>
     </Pressable>
   )

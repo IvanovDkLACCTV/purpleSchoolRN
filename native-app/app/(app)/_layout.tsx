@@ -9,11 +9,13 @@ import { Theme } from "../../constants/Colors"
 import { FontSize } from "../../shared/tokens"
 import { MenuButton } from "../../features/layout/ui/MenuButton/MenuButton"
 import { CustomDrawer } from "../../widget/layout/ui/CustomDrawer/CustomDrawer"
+import { useState } from "react"
 
 export default function AppLayout() {
   const { access_token } = useAtomValue(authAtom)
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
+  const [image, setImage] = useState<string | null>(null)
 
   if (!access_token) {
     return <Redirect href="/login" />
@@ -22,7 +24,7 @@ export default function AppLayout() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Drawer
-        drawerContent={(props) => <CustomDrawer {...props} />}
+        drawerContent={(props) => <CustomDrawer {...props} image={image} />}
         screenOptions={({ navigation }) => ({
           headerStyle: {
             backgroundColor: theme.lighter,

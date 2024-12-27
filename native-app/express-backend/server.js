@@ -26,7 +26,7 @@ const upload = multer({ storage })
 app.use(bodyParser.json())
 app.use(
   cors({
-    origin: "http://localhost:3030",
+    origin: "http://192.168.1.143:3030",
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -121,5 +121,5 @@ if (!fs.existsSync("uploads")) {
 }
 
 app.listen(port, () => {
-  console.log(`Server running on http://localhost:${port}`)
+  console.log(`Server running on http://192.168.1.143:${port}`)
 })

@@ -1,5 +1,7 @@
-export const PREFIX = "http://192.168.1.143:3030/api-v2"
+import getEnvVars from "../config/environment"
+
+const { apiUrl } = getEnvVars()
 
 export const FILE_API = {
-  uploadImage: `${PREFIX}/files/upload-image`,
+  uploadImage: `${apiUrl}/files/upload-image`,
 }

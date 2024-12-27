@@ -5,18 +5,22 @@ const ENV = {
     apiUrl: "http://localhost:3030/api-v2",
   },
   prod: {
-    apiUrl: "https://localhost:3030/api-v2",
+    apiUrl: "https://192.168.1.143:3030/api-v2",
   },
 }
 
 const getEnvVars = () => {
+  const isWeb = Platform.OS === "web"
+
   if (__DEV__) {
     return {
       ...ENV.dev,
       apiUrl: Platform.select({
         ios: "http://localhost:3030/api-v2",
         android: "http://192.168.1.143:3030/api-v2", // Special alias for Android emulator
-        default: "http://localhost:3030/api-v2",
+        default: isWeb
+          ? "http://localhost:3030/api-v2" // Web uses a specific host
+          : "http://192.168.1.143:3030/api-v2",
       }),
     }
   }

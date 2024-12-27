@@ -1,7 +1,7 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
-const users = require("./users")
+const { findUserByEmail, verifyPassword } = require("./users")
 const cors = require("cors")
 const multer = require("multer")
 const path = require("path")
@@ -24,9 +24,26 @@ const storage = multer.diskStorage({
 const upload = multer({ storage })
 
 app.use(bodyParser.json())
+
+// Configure CORS
+const allowedOrigins = [
+  "http://localhost:3030",
+  "http://192.168.1.143:3030", // Android, Web local
+  "http://192.168.1.143:3000", // Web React dev server
+]
+
 app.use(
   cors({
-    origin: "http://192.168.1.143:3030",
+    origin: (origin, callback) => {
+      // Allow requests without origin (like Postman)
+      if (!origin) return callback(null, true)
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true)
+      } else {
+        callback(new Error("Not allowed by CORS"))
+      }
+    },
     methods: ["GET", "POST"],
     credentials: true,
   })
@@ -58,20 +75,21 @@ app.post("/api-v2/files/upload-image", upload.single("files"), (req, res) => {
 })
 
 // Login endpoint
-app.post("/api-v2/auth/login", (req, res) => {
+app.post("/api-v2/auth/login", async (req, res) => {
   const { email, password } = req.body
 
   if (!email || !password) {
     return res.status(400).json({ error: "Email and password are required" })
   }
 
-  const user = users.find((u) => u.email === email)
+  const user = await findUserByEmail(email)
 
   if (!user) {
     return res.status(401).json({ error: "Email not found" })
   }
 
-  if (user.password !== password) {
+  const isPasswordValid = await verifyPassword(email, password)
+  if (!isPasswordValid) {
     return res.status(401).json({ error: "Incorrect password" })
   }
 
@@ -90,18 +108,18 @@ app.post("/api-v2/auth/login", (req, res) => {
 })
 
 // User profile endpoint
-app.get("/api-v2/user/profile", (req, res) => {
+app.get("/api-v2/user/profile", async (req, res) => {
   const token = req.headers.authorization?.split(" ")[1]
   if (!token) {
     return res.status(401).json({ error: "Unauthorized" })
   }
 
-  jwt.verify(token, secretKey, (err, decoded) => {
+  jwt.verify(token, secretKey, async (err, decoded) => {
     if (err) {
       return res.status(401).json({ error: "Invalid token" })
     }
 
-    const user = users.find((u) => u.id === decoded.id)
+    const user = await findUserByEmail(decoded.email)
     if (!user) {
       return res.status(404).json({ error: "User not found" })
     }
@@ -116,10 +134,14 @@ app.get("/api-v2/user/profile", (req, res) => {
   })
 })
 
+// Ensure uploads directory exists
 if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads")
 }
 
+// Start the server
 app.listen(port, () => {
-  console.log(`Server running on http://192.168.1.143:${port}`)
+  console.log(
+    `Server running on http://localhost:${port} and http://192.168.1.143:${port}`
+  )
 })

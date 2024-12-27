@@ -16,6 +16,7 @@ import { useTheme } from "../ThemeSwitch/ThemeContext"
 import { FontSize, Gaps, Radius } from "../tokens"
 import { Fonts } from "../../constants/Fonts"
 import { FILE_API } from "../api"
+import { UploaderPesponse } from "./ImageUploader.interface"
 
 interface ImageUploaderProps {
   onUpload: (uri: string) => void
@@ -109,7 +110,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
       return
     }
     const asset = result.assets[0]
-    const name = asset.fileName ?? `image_${Date.now()}.jpg` // резервное имя
+    const name = asset.fileName ?? `` // резервное имя
     await uploadToServer(asset.uri, name)
   }
 
@@ -122,16 +123,20 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
       type: "image/jpeg",
     })
     try {
-      const { data } = await axios.post(FILE_API.uploadImage, formData, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      console.log(data)
-      setImage(data.file.path) // обновляем состояние только с данными сервера
-      onUpload(data.file.path) // передаём путь выше
+      const { data } = await axios.post<UploaderPesponse>(
+        FILE_API.uploadImage,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      )
+      onUpload(data.usrls.original) // передаём путь выше
     } catch (error) {
-      console.error(error)
+      if (error instanceof AxiosError) {
+        console.log(error.response?.data)
+      }
     }
   }
 

@@ -67,9 +67,9 @@ app.post("/api-v2/files/upload-image", upload.single("files"), (req, res) => {
   const filePath = `/uploads/${req.file.filename}`
 
   return res.json({
-    message: "File uploaded successfully",
-    file: {
-      path: `${req.protocol}://${req.get("host")}${filePath}`,
+    usrls: {
+      original: `${req.protocol}://${req.get("host")}${filePath}`,
+      webP: `${req.protocol}://${req.get("host")}${filePath}`, // Assuming you want to return the same path for webP
     },
   })
 })

@@ -16,13 +16,14 @@ import { useTheme } from "../ThemeSwitch/ThemeContext"
 import { FontSize, Gaps, Radius } from "../tokens"
 import { Fonts } from "../../constants/Fonts"
 import { FILE_API } from "../api"
-import { UploaderPesponse } from "./ImageUploader.interface"
+import { UploadResponse } from "./ImageUploader.interface"
 
 interface ImageUploaderProps {
   onUpload: (uri: string) => void
+  onError: (error: string) => void
 }
 
-export function ImageUploader({ onUpload }: ImageUploaderProps) {
+export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
   // image picker
@@ -30,6 +31,25 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
   const [mediaLibraryPermission, requestMediaLibraryPermission] =
     useMediaLibraryPermissions()
   const [cameraPermission, requestCameraPermission] = useCameraPermissions()
+
+  const upload = async () => {
+    const isPermissionGranted = await verifyMediaLibraryPermissions()
+    if (!isPermissionGranted) {
+      onError("Access denided")
+      return
+    }
+    const asset = await pickImage()
+    if (!asset) {
+      onError("Pick the image")
+      return
+    }
+    const uploadedUrl = await uploadToServer(asset.uri, asset.fileName ?? "")
+    if (!uploadedUrl) {
+      onError("Upload image failed")
+      return
+    }
+    onUpload(uploadedUrl)
+  }
 
   const verifyMediaLibraryPermissions = async () => {
     if (!mediaLibraryPermission) {
@@ -96,10 +116,6 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
   }
 
   const pickImage = async () => {
-    const isPermissionGranted = await verifyMediaLibraryPermissions()
-    if (!isPermissionGranted) {
-      return
-    }
     const result = await launchImageLibraryAsync({
       mediaTypes: "images",
       allowsEditing: true,
@@ -107,11 +123,9 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
       quality: 1,
     })
     if (!result.assets) {
-      return
+      return null
     }
-    const asset = result.assets[0]
-    const name = asset.fileName ?? `` // резервное имя
-    await uploadToServer(asset.uri, name)
+    return result.assets[0]
   }
 
   //uploading on server
@@ -123,7 +137,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
       type: "image/jpeg",
     })
     try {
-      const { data } = await axios.post<UploaderPesponse>(
+      const { data } = await axios.post<UploadResponse>(
         FILE_API.uploadImage,
         formData,
         {
@@ -132,11 +146,12 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
           },
         }
       )
-      onUpload(data.usrls.original) // передаём путь выше
+      return data.urls.original
     } catch (error) {
       if (error instanceof AxiosError) {
         console.log(error.response?.data)
       }
+      return null
     }
   }
 
@@ -159,7 +174,7 @@ export function ImageUploader({ onUpload }: ImageUploaderProps) {
   })
 
   return (
-    <Pressable onPress={pickImage}>
+    <Pressable onPress={upload}>
       <View style={styles.uploader}>
         <UploadIcon />
         <Text style={styles.text}>Upload a new image</Text>

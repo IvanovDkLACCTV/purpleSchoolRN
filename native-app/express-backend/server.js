@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 // Configure CORS
 const allowedOrigins = [
@@ -49,6 +49,11 @@ app.use(
   })
 )
 
+app.use((req, res, next) => {
+  console.log(`[${req.method}] ${req.url}`, req.headers)
+  next()
+})
+
 // Serve static files from the uploads folder
 app.use("/uploads", express.static(path.join(__dirname, "uploads")))
 
@@ -59,20 +64,45 @@ app.use((req, res, next) => {
 })
 
 // Image upload endpoint
-app.post("/api-v2/files/upload-image", upload.single("files"), (req, res) => {
-  if (!req.file) {
-    return res.status(400).json({ error: "No file uploaded." })
+app.post(
+  "/api-v2/files/upload-image",
+  upload.single("files"),
+  async (req, res) => {
+    console.log("Body:", req.body) // Логируем тело запроса
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded." })
+      }
+
+      const { userId } = req.body // Получаем ID пользователя из тела запроса
+      if (!userId) {
+        return res.status(400).json({ error: "User ID is required." })
+      }
+
+      const filePath = `/uploads/${req.file.filename}`
+
+      // Обновляем путь в профиле пользователя
+      const users = await loadUsers()
+      const user = users.find((u) => u.id === userId)
+      if (!user) {
+        return res.status(404).json({ error: "User not found." })
+      }
+
+      user.photo = `${req.protocol}://${req.get("host")}${filePath}` // Обновляем путь к фото
+      await saveUsers(users) // Сохраняем обновления в users.json
+
+      return res.json({
+        message: "Image uploaded and user profile updated successfully.",
+        photo: user.photo,
+      })
+    } catch (error) {
+      console.error("Error uploading image:", error)
+      res
+        .status(500)
+        .json({ error: "An error occurred while uploading the image." })
+    }
   }
-
-  const filePath = `/uploads/${req.file.filename}`
-
-  return res.json({
-    usrls: {
-      original: `${req.protocol}://${req.get("host")}${filePath}`,
-      webP: `${req.protocol}://${req.get("host")}${filePath}`, // Assuming you want to return the same path for webP
-    },
-  })
-})
+)
 
 // Login endpoint
 app.post("/api-v2/auth/login", async (req, res) => {

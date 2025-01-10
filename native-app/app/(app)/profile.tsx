@@ -72,6 +72,7 @@ export default function Profile({ user }: UserMenuProps) {
           onPress={() => {
             submitProfile()
           }}
+          isDarkMode={isDarkMode}
         />
       </View>
       <View style={styles.bottom}>

@@ -42,9 +42,9 @@ export default function Profile({ user }: UserMenuProps) {
       <View style={styles.header}>
         <UserAvatar user={user} image={image || user?.photo || null} />
         <ImageUploader
-          onUpload={(uri) => {
-            console.log("Uploaded image URI:", uri)
-            setLocalImage(uri) // Сохраняем загруженный URL
+          onUpload={setLocalImage}
+          onError={(error) => {
+            console.error("Image upload error:", error)
           }}
         />
       </View>

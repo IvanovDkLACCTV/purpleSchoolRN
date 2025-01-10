@@ -1,12 +1,12 @@
 import { useEffect } from "react"
 import { StyleSheet, Text, View } from "react-native"
 
-import { User } from "../../model/user.model"
+import { User } from "../../../../entities/user/model/user.model"
 import { FontSize, Gaps } from "../../../../shared/tokens"
 import { Fonts } from "../../../../constants/Fonts"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../../../constants/Colors"
-import UserAvatar from "../UserAvatar/UserAvatar"
+import UserAvatar from "../../../../entities/user/ui/UserAvatar/UserAvatar"
 
 interface UserMenuProps {
   user: User | null

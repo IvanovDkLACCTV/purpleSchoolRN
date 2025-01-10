@@ -12,7 +12,7 @@ import { CloseDrawer } from "../../../../features/layout/ui/CloseDrawer/CloseDra
 import { CustomLink } from "../../../../shared/CustomLink/CustomLink"
 import { logoutAtom } from "../../../../entities/auth/model/auth.state"
 import { loadProfileAtom } from "../../../../entities/user/model/user.state"
-import { UserMenu } from "../../../../entities/user/ui/UserMenu/UserMenu"
+import { UserMenu } from "../UserMenu/UserMenu"
 import CoursesIcon from "../../../../assets/menu/courses"
 import ProfileIcon from "../../../../assets/menu/profile"
 import { MenuItem } from "../../../../entities/layout/ui/MenuItem/MenuItem"

@@ -1,11 +1,14 @@
 import { View, StyleSheet } from "react-native"
+import { useEffect, useState } from "react"
+import { useAtom } from "jotai"
+
 import ThemeSwitch from "../../shared/ThemeSwitch/ThemeSwitch"
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
 import { ImageUploader } from "../../shared/ImageUploader/ImageUploader"
 import UserAvatar from "../../entities/user/ui/UserAvatar/UserAvatar"
 import { Gaps } from "../../shared/tokens"
-import { useState } from "react"
+import { updateProfileAtom } from "../../entities/user/model/user.state"
 import { User } from "../../entities/user/model/user.model"
 
 interface UserMenuProps {
@@ -16,6 +19,13 @@ export default function Profile({ user }: UserMenuProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
   const [image, setLocalImage] = useState<string | null>(null)
+  const [profile, updateProfile] = useAtom(updateProfileAtom)
+
+  useEffect(() => {
+    if (profile && profile.profile?.photo) {
+      setLocalImage(profile.profile?.photo)
+    }
+  }, [image])
 
   const styles = StyleSheet.create({
     container: {

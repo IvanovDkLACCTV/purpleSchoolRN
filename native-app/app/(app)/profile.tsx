@@ -10,6 +10,7 @@ import UserAvatar from "../../entities/user/ui/UserAvatar/UserAvatar"
 import { Gaps } from "../../shared/tokens"
 import { updateProfileAtom } from "../../entities/user/model/user.state"
 import { User } from "../../entities/user/model/user.model"
+import { Button } from "../../shared/Button/Button"
 
 interface UserMenuProps {
   user: User | null
@@ -20,6 +21,13 @@ export default function Profile({ user }: UserMenuProps) {
   const theme = isDarkMode ? Theme.dark : Theme.light
   const [image, setLocalImage] = useState<string | null>(null)
   const [profile, updateProfile] = useAtom(updateProfileAtom)
+
+  const submitProfile = () => {
+    if (!image) return
+    if (profile && profile.profile) {
+      updateProfile({ photo: image })
+    }
+  }
 
   useEffect(() => {
     if (profile && profile.profile?.photo) {
@@ -55,6 +63,14 @@ export default function Profile({ user }: UserMenuProps) {
           onUpload={setLocalImage}
           onError={(error) => {
             console.error("Image upload error:", error)
+          }}
+        />
+      </View>
+      <View>
+        <Button
+          title="Save"
+          onPress={() => {
+            submitProfile()
           }}
         />
       </View>

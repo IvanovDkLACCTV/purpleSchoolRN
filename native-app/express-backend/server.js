@@ -23,7 +23,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage })
 
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.json())
 
 // Configure CORS
 const allowedOrigins = [

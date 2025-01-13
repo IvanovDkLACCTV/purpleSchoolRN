@@ -136,6 +136,7 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
       name: fileName,
       type: "image/jpeg",
     })
+    formData.append("userId", 2)
     try {
       const { data } = await axios.post<UploadResponse>(
         FILE_API.uploadImage,

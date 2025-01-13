@@ -1,7 +1,12 @@
 const express = require("express")
 const bodyParser = require("body-parser")
 const jwt = require("jsonwebtoken")
-const { findUserByEmail, verifyPassword } = require("./users")
+const {
+  findUserByEmail,
+  verifyPassword,
+  loadUsers,
+  saveUsers,
+} = require("./users")
 const cors = require("cors")
 const multer = require("multer")
 const path = require("path")
@@ -28,6 +33,7 @@ app.use(bodyParser.json())
 // Configure CORS
 const allowedOrigins = [
   "http://localhost:3030",
+  "http://192.168.3.12:3030",
   "http://192.168.1.143:3030", // Android, Web local
   "http://192.168.1.143:3000", // Web React dev server
 ]

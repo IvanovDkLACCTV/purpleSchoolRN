@@ -14,7 +14,7 @@ const users = [
     name: "Tony",
     surname: "Stark",
     email: "user@mail.com",
-    photo: "http://192.168.1.143:3030/uploads/tony.jpeg",
+    photo: "http://localhost:3030/uploads/tony.jpeg",
     password: "123456",
   },
 ]

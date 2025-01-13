@@ -35,7 +35,7 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
   const upload = async () => {
     const isPermissionGranted = await verifyMediaLibraryPermissions()
     if (!isPermissionGranted) {
-      onError("Access denided")
+      onError("Access denied")
       return
     }
     const asset = await pickImage()

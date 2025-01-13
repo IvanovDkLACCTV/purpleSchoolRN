@@ -11,6 +11,8 @@ import { Gaps } from "../../shared/tokens"
 import { updateProfileAtom } from "../../entities/user/model/user.state"
 import { User } from "../../entities/user/model/user.model"
 import { Button } from "../../shared/Button/Button"
+import { FILE_API } from "../../shared/api"
+import { authAtom } from "../../entities/auth/model/auth.state"
 
 interface UserMenuProps {
   user: User | null
@@ -21,11 +23,31 @@ export default function Profile({ user }: UserMenuProps) {
   const theme = isDarkMode ? Theme.dark : Theme.light
   const [image, setLocalImage] = useState<string | null>(null)
   const [profile, updateProfile] = useAtom(updateProfileAtom)
+  const [authState] = useAtom(authAtom)
+  const access_token = authState.access_token
 
-  const submitProfile = () => {
+  const submitProfile = async () => {
     if (!image) return
     if (profile && profile.profile) {
-      updateProfile({ photo: image })
+      try {
+        const response = await fetch(FILE_API.uploadImage, {
+          method: "POST",
+          body: JSON.stringify({ photo: image }),
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${access_token}`,
+          },
+        })
+        const data = await response.json()
+        if (response.ok) {
+          updateProfile({ photo: data.photo })
+          setLocalImage(data.photo)
+        } else {
+          console.error("Error uploading image:", data.error)
+        }
+      } catch (error) {
+        console.error("Error uploading image:", error)
+      }
     }
   }
 
@@ -67,13 +89,7 @@ export default function Profile({ user }: UserMenuProps) {
         />
       </View>
       <View>
-        <Button
-          title="Save"
-          onPress={() => {
-            submitProfile()
-          }}
-          isDarkMode={isDarkMode}
-        />
+        <Button title="Save" onPress={submitProfile} isDarkMode={isDarkMode} />
       </View>
       <View style={styles.bottom}>
         <ThemeSwitch />

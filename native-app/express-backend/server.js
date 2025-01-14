@@ -36,14 +36,14 @@ const allowedOrigins = [
   "http://192.168.3.12:3030",
   "http://192.168.1.143:3030", // Android, Web local
   "http://192.168.1.143:3000", // Web React dev server
+  "http://localhost:8081/",
+  "http://localhost:3000",
 ]
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests without origin (like Postman)
-      if (!origin) return callback(null, true)
-
+      if (!origin) return callback(null, true) // Allow requests without origin (like Postman)
       if (allowedOrigins.includes(origin)) {
         callback(null, true)
       } else {

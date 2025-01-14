@@ -19,8 +19,8 @@ const getEnvVars = () => {
         ios: "http://localhost:3030/api-v2",
         android: "http://192.168.1.143:3030/api-v2", // Special alias for Android emulator
         default: isWeb
-          ? "http://localhost:3030/api-v2" // Web uses a specific host
-          : "http://192.168.1.143:3030/api-v2",
+          ? "http://192.168.1.143:3030/api-v2" // Web uses a specific host
+          : "http://localhost:3030/api-v2",
       }),
     }
   }

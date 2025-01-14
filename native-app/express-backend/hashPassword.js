@@ -6,7 +6,7 @@ const users = [
     name: "Bradly",
     surname: "Doe",
     email: "user@example.com",
-    photo: "",
+    photo: "http://localhost:3030/uploads/bradly.jpeg",
     password: "password123",
   },
   {

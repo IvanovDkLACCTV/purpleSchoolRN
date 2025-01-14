@@ -21,9 +21,14 @@ import { UploadResponse } from "./ImageUploader.interface"
 interface ImageUploaderProps {
   onUpload: (uri: string) => void
   onError: (error: string) => void
+  userId: string | null
 }
 
-export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
+export function ImageUploader({
+  onUpload,
+  onError,
+  userId,
+}: ImageUploaderProps) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
   // image picker
@@ -43,7 +48,11 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
       onError("Pick the image")
       return
     }
-    const uploadedUrl = await uploadToServer(asset.uri, asset.fileName ?? "")
+    const uploadedUrl = await uploadToServer(
+      asset.uri,
+      asset.fileName ?? "",
+      userId || ""
+    )
     if (!uploadedUrl) {
       onError("Upload image failed")
       return
@@ -129,14 +138,18 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
   }
 
   //uploading on server
-  const uploadToServer = async (uri: string, fileName: string) => {
+  const uploadToServer = async (
+    uri: string,
+    fileName: string,
+    userId: string
+  ) => {
     const formData = new FormData()
     formData.append("files", {
       uri,
       name: fileName,
       type: "image/jpeg",
     })
-    formData.append("userId", "2") // Пример ID пользователя, заменить на dynamic
+    formData.append("userId", userId)
 
     try {
       const { data } = await axios.post<UploadResponse>(

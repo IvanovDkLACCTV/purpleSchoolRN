@@ -1,6 +1,7 @@
 import { View, StyleSheet } from "react-native"
 import { useEffect, useState } from "react"
 import { useAtom } from "jotai"
+import * as Sharing from "expo-sharing"
 
 import ThemeSwitch from "../../shared/ThemeSwitch/ThemeSwitch"
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
@@ -13,6 +14,7 @@ import { User } from "../../entities/user/model/user.model"
 import { Button } from "../../shared/Button/Button"
 import { FILE_API } from "../../shared/api"
 import { authAtom } from "../../entities/auth/model/auth.state"
+import { API } from "../../entities/auth/api/api"
 
 interface UserMenuProps {
   user: User | null
@@ -25,6 +27,19 @@ export default function Profile({ user }: UserMenuProps) {
   const [profile, updateProfile] = useAtom(updateProfileAtom)
   const [authState] = useAtom(authAtom)
   const access_token = authState.access_token
+  const [userId, setUserId] = useState<string | null>(null)
+
+  const shareProfile = async () => {
+    const isAvailableAsync = await Sharing.isAvailableAsync()
+    if (!isAvailableAsync) {
+      return
+    }
+    if (isAvailableAsync) {
+      await Sharing.shareAsync("http://localhost:3030", {
+        dialogTitle: "Share profile",
+      })
+    }
+  }
 
   const submitProfile = async () => {
     if (!image) return
@@ -57,6 +72,28 @@ export default function Profile({ user }: UserMenuProps) {
     }
   }, [image])
 
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await fetch(API.profile, {
+          headers: {
+            Authorization: `Bearer ${access_token}`,
+          },
+        })
+        const data = await response.json()
+        if (response.ok) {
+          setUserId(data.id)
+        } else {
+          console.error("Error fetching user profile:", data.error)
+        }
+      } catch (error) {
+        console.error("Error fetching user profile:", error)
+      }
+    }
+
+    fetchUserProfile()
+  }, [access_token])
+
   const styles = StyleSheet.create({
     container: {
       backgroundColor: theme.background,
@@ -86,10 +123,14 @@ export default function Profile({ user }: UserMenuProps) {
           onError={(error) => {
             console.error("Image upload error:", error)
           }}
+          userId={userId}
         />
       </View>
       <View>
         <Button title="Save" onPress={submitProfile} isDarkMode={isDarkMode} />
+      </View>
+      <View>
+        <Button title="Share" onPress={shareProfile} isDarkMode={isDarkMode} />
       </View>
       <View style={styles.bottom}>
         <ThemeSwitch />

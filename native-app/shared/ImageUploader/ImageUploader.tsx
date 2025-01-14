@@ -136,7 +136,8 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
       name: fileName,
       type: "image/jpeg",
     })
-    formData.append("userId", 2)
+    formData.append("userId", "2") // Пример ID пользователя, заменить на dynamic
+
     try {
       const { data } = await axios.post<UploadResponse>(
         FILE_API.uploadImage,
@@ -150,7 +151,7 @@ export function ImageUploader({ onUpload, onError }: ImageUploaderProps) {
       return data.urls.original
     } catch (error) {
       if (error instanceof AxiosError) {
-        console.log(error.response?.data)
+        console.error("Axios error:", error.response?.data || error.message)
       }
       return null
     }

@@ -181,3 +181,42 @@ app.listen(port, () => {
     `Server running on http://localhost:${port} and http://192.168.1.143:${port}`
   )
 })
+
+//logging
+app.post(
+  "/api-v2/files/upload-image",
+  upload.single("files"),
+  async (req, res) => {
+    try {
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded." })
+      }
+
+      const { userId } = req.body
+      if (!userId) {
+        return res.status(400).json({ error: "User ID is required." })
+      }
+
+      const filePath = `/uploads/${req.file.filename}`
+
+      const users = await loadUsers()
+      const user = users.find((u) => u.id === parseInt(userId, 10))
+      if (!user) {
+        return res.status(404).json({ error: "User not found." })
+      }
+
+      user.photo = `${req.protocol}://${req.get("host")}${filePath}`
+      await saveUsers(users)
+
+      return res.json({
+        message: "Image uploaded successfully.",
+        photo: user.photo,
+      })
+    } catch (error) {
+      console.error("Error uploading image:", error)
+      return res
+        .status(500)
+        .json({ error: "An error occurred while uploading the image." })
+    }
+  }
+)

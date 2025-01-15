@@ -17,6 +17,7 @@ import { useTheme } from "../shared/ThemeSwitch/ThemeContext"
 import { CustomLink } from "../shared/CustomLink/CustomLink"
 import { loginAtom } from "../entities/auth/model/auth.state"
 import ThemeSwitch from "../shared/ThemeSwitch/ThemeSwitch"
+import { useScreenOrientation } from "../shared/hooks"
 
 interface ErrorResponse {
   error: string
@@ -31,6 +32,10 @@ export default function Login() {
   const [password, setPassword] = useState<string>("")
   const [{ access_token, isLoading, error: loginError }, login] =
     useAtom(loginAtom)
+
+  //managing screen orientation
+  const orientation = useScreenOrientation()
+  console.log(orientation)
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,

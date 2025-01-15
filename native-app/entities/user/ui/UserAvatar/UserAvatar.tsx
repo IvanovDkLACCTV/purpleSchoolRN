@@ -17,12 +17,12 @@ const UserAvatar: React.FC<UserAvatarProps> = ({ user, image }) => {
     }
   }, [image])
 
-  useEffect(() => {
-    console.log("Loaded image:", loadedImage)
-  }, [loadedImage])
+  //image logger
+  //useEffect(() => {
+  //console.log("Loaded image:", loadedImage)
+  //}, [loadedImage])
 
   const cacheBustingUrl = loadedImage ? `${loadedImage}?t=${Date.now()}` : null
-  console.log("Image URL:", cacheBustingUrl)
 
   return (
     <View>

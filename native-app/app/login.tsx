@@ -1,6 +1,6 @@
 //outer imports
 import { useEffect, useState } from "react"
-import { StyleSheet, Text, View, Image } from "react-native"
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native"
 import { router } from "expo-router"
 import { useAtom } from "jotai"
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins"
@@ -18,6 +18,7 @@ import { CustomLink } from "../shared/CustomLink/CustomLink"
 import { loginAtom } from "../entities/auth/model/auth.state"
 import ThemeSwitch from "../shared/ThemeSwitch/ThemeSwitch"
 import { useScreenOrientation } from "../shared/hooks"
+import { Orientation } from "expo-screen-orientation"
 
 interface ErrorResponse {
   error: string
@@ -115,20 +116,40 @@ export default function Login() {
           Welcome back
         </Text>
         <View style={styles.form}>
-          <Input
-            placeholder="Enter your email"
-            autoCapitalize="none"
-            keyboardType="email-address"
-            isDarkMode={isDarkMode}
-            onChangeText={setEmail}
-          />
-          <Input
-            placeholder="Enter your password"
-            isPassword={true}
-            autoCapitalize="none"
-            isDarkMode={isDarkMode}
-            onChangeText={setPassword}
-          />
+          <View
+            style={{
+              ...styles.inputs,
+              flexDirection:
+                orientation === Orientation.PORTRAIT_UP ? "column" : "row",
+            }}
+          >
+            <Input
+              style={{
+                width:
+                  orientation === Orientation.PORTRAIT_UP
+                    ? "auto"
+                    : Dimensions.get("screen").width * 0.5 - 16 - 48,
+              }}
+              placeholder="Enter your email"
+              autoCapitalize="none"
+              keyboardType="email-address"
+              isDarkMode={isDarkMode}
+              onChangeText={setEmail}
+            />
+            <Input
+              style={{
+                width:
+                  orientation === Orientation.PORTRAIT_UP
+                    ? "auto"
+                    : Dimensions.get("screen").width * 0.5 - 16 - 48,
+              }}
+              placeholder="Enter your password"
+              isPassword={true}
+              autoCapitalize="none"
+              isDarkMode={isDarkMode}
+              onChangeText={setPassword}
+            />
+          </View>
           <CustomLink
             href="/restore"
             text="Forgot your password?"
@@ -202,5 +223,8 @@ const styles = StyleSheet.create({
   text: {
     fontFamily: "Poppins_400Regular",
     fontSize: 16,
+  },
+  inputs: {
+    gap: Gaps.g16,
   },
 })

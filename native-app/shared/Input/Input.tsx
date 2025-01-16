@@ -4,25 +4,27 @@ import {
   TextInputProps,
   Pressable,
   View,
-} from "react-native";
-import React, { useState } from "react";
-import { Theme } from "../../constants/Colors";
-import { Radius } from "../tokens";
-import EyeClosedIcon from "../../assets/icons/eye-closed";
-import EyeOpenedIcon from "../../assets/icons/eye-opened";
+} from "react-native"
+import React, { useState } from "react"
+
+import { Theme } from "../../constants/Colors"
+import { Radius } from "../tokens"
+import EyeClosedIcon from "../../assets/icons/eye-closed"
+import EyeOpenedIcon from "../../assets/icons/eye-opened"
 
 interface InputProps extends TextInputProps {
-  isDarkMode: boolean;
-  isPassword?: boolean;
+  isDarkMode: boolean
+  isPassword?: boolean
+  style?: any
 }
 
 export const Input = (props: InputProps) => {
-  const { isDarkMode, isPassword, ...restProps } = props;
-  const theme = isDarkMode ? Theme.dark : Theme.light;
-  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false);
+  const { style, isDarkMode, isPassword, ...restProps } = props
+  const theme = isDarkMode ? Theme.dark : Theme.light
+  const [isPasswordVisible, setIsPasswordVisible] = useState<boolean>(false)
 
   return (
-    <View>
+    <View style={style?.inputs}>
       <TextInput
         style={[
           styles.input,
@@ -44,8 +46,8 @@ export const Input = (props: InputProps) => {
         </Pressable>
       )}
     </View>
-  );
-};
+  )
+}
 
 const styles = StyleSheet.create({
   input: {
@@ -62,4 +64,4 @@ const styles = StyleSheet.create({
     right: 20,
     top: 12,
   },
-});
+})

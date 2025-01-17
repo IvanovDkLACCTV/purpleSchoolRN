@@ -1,6 +1,14 @@
 //outer imports
 import { useEffect, useState } from "react"
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native"
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  KeyboardAvoidingView,
+  Platform,
+} from "react-native"
 import { router } from "expo-router"
 import { useAtom } from "jotai"
 import { useFonts, Poppins_400Regular } from "@expo-google-fonts/poppins"
@@ -106,7 +114,10 @@ export default function Login() {
           }}
         />
       </View>
-      <View style={styles.content}>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === "ios" ? "padding" : "height"}
+        style={styles.content}
+      >
         <Text
           style={[
             styles.textStyle,
@@ -169,7 +180,7 @@ export default function Login() {
           </Text>
           <CustomLink href="/restore" text="Sign up" />
         </View>
-      </View>
+      </KeyboardAvoidingView>
       <View style={styles.bottom}>
         <ThemeSwitch />
       </View>
@@ -204,7 +215,12 @@ const styles = StyleSheet.create({
   textStyle: {
     fontFamily: "Poppins_400Regular",
     color: Theme.light.text,
-    fontSize: FontSize.f24,
+    fontSize: Platform.select({
+      ios: FontSize.f20,
+      android: FontSize.f24,
+      web: FontSize.f26,
+      default: FontSize.f24,
+    }),
   },
   form: {
     alignSelf: "stretch",

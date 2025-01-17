@@ -36,7 +36,7 @@ export default function Login() {
 
   //managing screen orientation
   const orientation = useScreenOrientation()
-  console.log(orientation)
+  //console.log(orientation)
 
   const [fontsLoaded] = useFonts({
     Poppins_400Regular,
@@ -181,6 +181,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: Theme.light.background,
     justifyContent: "center",
+    alignItems: "center",
     flex: 1,
     width: Width,
     padding: Width * 0.1,
@@ -197,6 +198,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: Gaps.g50,
     marginTop: Width * 0.2,
+    maxWidth: 600,
+    minWidth: "60%",
   },
   textStyle: {
     fontFamily: "Poppins_400Regular",
@@ -206,6 +209,7 @@ const styles = StyleSheet.create({
   form: {
     alignSelf: "stretch",
     gap: Gaps.g16,
+    maxWidth: 400,
   },
   bottom: {
     position: "absolute",

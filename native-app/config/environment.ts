@@ -27,4 +27,6 @@ const getEnvVars = () => {
   return ENV.prod
 }
 
+export const PREFIX = getEnvVars().apiUrl
+
 export default getEnvVars

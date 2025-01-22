@@ -176,9 +176,6 @@ if (!fs.existsSync("uploads")) {
   fs.mkdirSync("uploads")
 }
 
-// Use the courses routes
-app.use("/api-v2", coursesRouter)
-
 // Start the server
 app.listen(port, () => {
   console.log(

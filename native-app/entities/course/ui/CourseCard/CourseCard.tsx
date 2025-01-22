@@ -6,19 +6,30 @@ import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Chip } from "../../../../shared/Chip/Chip"
 import { Button } from "../../../../shared/Button/Button"
 
-const { isDarkMode, setIsDarkMode } = useTheme()
-const theme = isDarkMode ? Theme.dark : Theme.light
-
 export function CourseCard({
   image,
   title,
   courseOnDirection,
 }: StudentCourseDescription) {
+  const { isDarkMode } = useTheme()
+  const theme = isDarkMode ? Theme.dark : Theme.light
+
+  const styles = StyleSheet.create({
+    card: {},
+    header: { flexDirection: "row", justifyContent: "space-between" },
+    footer: {},
+    image: { width: 100, height: 200 },
+    title: {
+      /* Removed color here, set it dynamically */
+    },
+    chips: { flexDirection: "row", flexWrap: "wrap" },
+  })
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: image }} style={styles.image} />
       <View style={styles.header}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
         <View style={styles.chips}>
           {courseOnDirection.length > 0 &&
             courseOnDirection.map((c) => <Chip text={c.direction.name} />)}
@@ -30,12 +41,3 @@ export function CourseCard({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  card: {},
-  header: { flexDirection: "row", justifyContent: "space-between" },
-  footer: {},
-  image: { width: 100, height: 200 },
-  title: { color: theme.text },
-  chips: { flexDirection: "row", flexWrap: "wrap" },
-})

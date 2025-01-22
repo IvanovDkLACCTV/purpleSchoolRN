@@ -23,7 +23,7 @@ export default function UnmatchedCustom() {
         />
         <Text style={[styles.text, { color: theme.text }]}>
           Wow, dude... Something went wrong. Try to get back to the &nbsp;
-          <CustomLink href="/" text="Homepage" />
+          <CustomLink href="/login" text="Homepage" />
         </Text>
       </View>
       <View style={styles.bottom}>

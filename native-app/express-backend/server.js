@@ -11,7 +11,7 @@ const cors = require("cors")
 const multer = require("multer")
 const path = require("path")
 const fs = require("fs")
-const coursesRouter = require("./courses") // Import the courses router
+const router = require("./courses") // Import the courses router
 
 const app = express()
 const port = 3030
@@ -177,7 +177,7 @@ if (!fs.existsSync("uploads")) {
 }
 
 // Use the courses routes
-app.use("/api-v2", coursesRouter)
+app.use("/api-v2", router)
 
 // Start the server
 app.listen(port, () => {

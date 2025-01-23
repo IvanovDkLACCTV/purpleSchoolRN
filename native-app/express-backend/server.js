@@ -182,7 +182,7 @@ app.use("/api-v2", router)
 // Start the server
 app.listen(port, () => {
   console.log(
-    `Server running on http://localhost:${port} and http://192.168.1.143:${port}`
+    `Server running on http://localhost:${port} (http://192.168.1.143:${port})`
   )
 })
 

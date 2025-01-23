@@ -10,6 +10,7 @@ export type StudentCourseDescription = {
   image: string
   title: string
   alias: string
+  description: string
   length: number
   avgRating: number
   price: number

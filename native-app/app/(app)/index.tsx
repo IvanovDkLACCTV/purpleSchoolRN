@@ -1,4 +1,4 @@
-import { View, StyleSheet, Text } from "react-native"
+import { View, StyleSheet, Text, Image } from "react-native"
 import { useAtomValue, useSetAtom } from "jotai"
 import { logoutAtom } from "../../entities/auth/model/auth.state"
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
@@ -36,7 +36,13 @@ export default function MyCourses() {
   return (
     <View style={styles.container}>
       {courses.length > 0 &&
-        courses.map((c) => <Text key={c.id}>{c.title}</Text>)}
+        courses.map((c) => (
+          <View key={c.id}>
+            <Text>{c.shortTitle}</Text>
+            <Text>{c.title}</Text>
+            <Text>{c.description}</Text>
+          </View>
+        ))}
       <View style={styles.bottom}>
         <ThemeSwitch />
       </View>

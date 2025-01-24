@@ -12,6 +12,7 @@ export const Theme = {
     preHover: Colors.accentColorLight,
     lighter: Colors.preHover,
     error: Colors.tomato,
+    border: Colors.borderLight,
   },
   dark: {
     background: Colors.black,
@@ -26,5 +27,6 @@ export const Theme = {
     lighter: Colors.inputBackgroundColorDark,
     error: Colors.red,
     gradientDarkPurple: Colors.gradientDarkPurple,
+    border: Colors.borderDark,
   },
 }

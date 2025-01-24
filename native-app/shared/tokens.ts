@@ -22,6 +22,8 @@ export const Colors = {
   gradientDarkPurple: "#572EA0",
   drawerBackgroundLight: "#BEEAE4",
   drawerBackgroundDark: "#5A2EA6",
+  borderLight: "#A7E5DE",
+  borderDark: "#4D5064",
 }
 
 export const Gaps = {
@@ -35,6 +37,7 @@ export const Gaps = {
 
 export const Radius = {
   r10: 10,
+  r17: 17,
   r20: 20,
 }
 

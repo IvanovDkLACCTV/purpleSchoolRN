@@ -14,10 +14,11 @@ export function CourseCard({
 }: StudentCourseDescription) {
   return (
     <View style={styles.card}>
-      <Image source={{ uri: image }} style={styles.image} />
+      <Image source={{ uri: image }} style={styles.image} height={200} />
       <View>
         <Text style={styles.title}>{title}</Text>
-        {courseOnDirection.length > 0}
+        {courseOnDirection.length > 0 &&
+          courseOnDirection.map((d) => <Text>{d.direction.name}</Text>)}
       </View>
     </View>
   )
@@ -25,6 +26,6 @@ export function CourseCard({
 
 const styles = StyleSheet.create({
   card: {},
-  image: { width: 100, height: 200 },
+  image: {},
   title: { color: theme.text },
 })

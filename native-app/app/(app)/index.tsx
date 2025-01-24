@@ -9,6 +9,7 @@ import {
   loadCourseAtom,
 } from "../../entities/course/model/course.state"
 import { useEffect } from "react"
+import { CourseCard } from "../../entities/course/ui/CourseCard/CourseCard"
 
 export default function MyCourses() {
   const { isDarkMode } = useTheme()
@@ -36,13 +37,7 @@ export default function MyCourses() {
   return (
     <View style={styles.container}>
       {courses.length > 0 &&
-        courses.map((c) => (
-          <View key={c.id}>
-            <Text>{c.shortTitle}</Text>
-            <Text>{c.title}</Text>
-            <Text>{c.description}</Text>
-          </View>
-        ))}
+        courses.map((c) => <CourseCard {...c} key={c.id} />)}
       <View style={styles.bottom}>
         <ThemeSwitch />
       </View>

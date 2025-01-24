@@ -4,7 +4,7 @@ const router = express.Router()
 // Sample course data
 const courses = [
   {
-    id: 1,
+    id: 1234,
     shortTitle: "Course 1",
     image: "https://192.168.1.143:3030/uploads/tony.jpeg",
     title: "Introduction to Course 1",
@@ -16,7 +16,7 @@ const courses = [
     courseOnDirection: [{ direction: { name: "Direction 1" } }],
     tariffs: [
       {
-        id: 1,
+        id: 1567,
         name: "Basic",
         price: 100,
         type: "basic",
@@ -33,9 +33,9 @@ const courses = [
     },
   },
   {
-    id: 2,
+    id: 2234,
     shortTitle: "Course 2",
-    image: "https://192.168.1.143:3030/uploads/course2.jpeg",
+    image: "https://192.168.1.143:3030/uploads/bradly.jpeg",
     title: "Advanced Course 2",
     alias: "course-2",
     description: "Description of Course 2",
@@ -45,7 +45,7 @@ const courses = [
     courseOnDirection: [{ direction: { name: "Direction 2" } }],
     tariffs: [
       {
-        id: 2,
+        id: 2463,
         name: "Premium",
         price: 150,
         type: "premium",
@@ -62,9 +62,9 @@ const courses = [
     },
   },
   {
-    id: 3,
+    id: 3657,
     shortTitle: "Course 3",
-    image: "https://192.168.1.143:3030/uploads/course3.jpeg",
+    image: "https://192.168.1.143:3030/uploads/1736936177326.jpeg",
     title: "Beginner Course 3",
     alias: "course-3",
     description: "Description of Course 3",
@@ -74,7 +74,7 @@ const courses = [
     courseOnDirection: [{ direction: { name: "Direction 3" } }],
     tariffs: [
       {
-        id: 3,
+        id: 3789,
         name: "Standard",
         price: 120,
         type: "standard",

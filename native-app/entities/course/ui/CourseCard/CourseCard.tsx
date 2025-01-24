@@ -1,5 +1,4 @@
 import { Image, StyleSheet, Text, View } from "react-native"
-
 import { StudentCourseDescription } from "../../model/course.model"
 import { Theme } from "../../../../constants/Colors"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
@@ -11,25 +10,19 @@ export function CourseCard({
   title,
   courseOnDirection,
 }: StudentCourseDescription) {
-  const { isDarkMode, setIsDarkMode } = useTheme()
+  const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
 
-  const styles = StyleSheet.create({
-    card: {},
-    image: {},
-    title: { color: theme.text },
-    chips: {},
-    header: {},
-    footer: {},
-  })
   return (
     <View style={styles.card}>
       <Image source={{ uri: image }} style={styles.image} height={200} />
       <View style={styles.header}>
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
         <View style={styles.chips}>
           {courseOnDirection.length > 0 &&
-            courseOnDirection.map((c) => <Chip text={c.direction.name} />)}
+            courseOnDirection.map((c, index) => (
+              <Chip key={index} text={c.direction.name} />
+            ))}
         </View>
       </View>
       <View style={styles.footer}>
@@ -38,3 +31,12 @@ export function CourseCard({
     </View>
   )
 }
+
+const styles = StyleSheet.create({
+  card: {},
+  image: {},
+  title: {},
+  chips: {},
+  header: {},
+  footer: {},
+})

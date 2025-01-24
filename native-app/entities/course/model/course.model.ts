@@ -14,7 +14,7 @@ export type StudentCourseDescription = {
   length: number
   avgRating: number
   price: number
-  courseOnDirection: { direction: Record<"name", string> }[]
+  courseOnDirection: { id: number; direction: Record<"name", string> }[]
   tariffs: Tariff[]
   progress: Progress
 }

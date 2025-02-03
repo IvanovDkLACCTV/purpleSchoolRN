@@ -4,6 +4,8 @@ import { Theme } from "../../../../constants/Colors"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Chip } from "../../../../shared/Chip/Chip"
 import { Button } from "../../../../shared/Button/Button"
+import { Radius } from "../../../../shared/tokens"
+import React, { useState } from "react"
 
 export function CourseCard({
   image,
@@ -12,10 +14,47 @@ export function CourseCard({
 }: StudentCourseDescription) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
+  const [imageError, setImageError] = useState(false)
+
+  const styles = StyleSheet.create({
+    card: {
+      flexDirection: "column",
+      borderRadius: Radius.r10,
+      backgroundColor: theme.background,
+    },
+    image: {
+      width: "100%",
+      height: 200,
+      borderRadius: Radius.r10,
+    },
+    imagePlaceholder: {
+      width: "100%",
+      height: 200,
+      justifyContent: "center",
+      alignItems: "center",
+      backgroundColor: theme.border,
+      borderRadius: Radius.r10,
+    },
+    title: {},
+    chips: {},
+    header: {},
+    footer: {},
+  })
 
   return (
     <View style={styles.card}>
-      <Image source={{ uri: image }} style={styles.image} height={200} />
+      {!imageError ? (
+        <Image
+          source={{ uri: image }}
+          style={styles.image}
+          height={200}
+          onError={() => setImageError(true)}
+        />
+      ) : (
+        <View style={styles.imagePlaceholder}>
+          <Text style={{ color: theme.text }}>Image not available</Text>
+        </View>
+      )}
       <View style={styles.header}>
         <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
         <View style={styles.chips}>
@@ -31,12 +70,3 @@ export function CourseCard({
     </View>
   )
 }
-
-const styles = StyleSheet.create({
-  card: {},
-  image: {},
-  title: {},
-  chips: {},
-  header: {},
-  footer: {},
-})

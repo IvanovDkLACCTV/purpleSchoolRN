@@ -6,7 +6,7 @@ const courses = [
   {
     id: 1234,
     shortTitle: "Course 1",
-    image: "https://192.168.1.143:3030/uploads/tony.jpeg",
+    image: "http://192.168.1.143:3030/api-v2/uploads/tony.jpeg",
     title: "Introduction to Course 1",
     alias: "course-1",
     description: "Description of Course 1",

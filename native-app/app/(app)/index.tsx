@@ -10,6 +10,7 @@ import {
 } from "../../entities/course/model/course.state"
 import { useEffect } from "react"
 import { CourseCard } from "../../entities/course/ui/CourseCard/CourseCard"
+import { Gaps } from "../../shared/tokens"
 
 export default function MyCourses() {
   const { isDarkMode } = useTheme()
@@ -22,6 +23,8 @@ export default function MyCourses() {
       justifyContent: "center",
       flex: 1,
       padding: 20,
+      flexDirection: "column",
+      gap: Gaps.g20,
     },
     bottom: {
       marginTop: "auto",

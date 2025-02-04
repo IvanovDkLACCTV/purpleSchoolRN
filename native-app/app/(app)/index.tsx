@@ -1,4 +1,4 @@
-import { View, StyleSheet, ScrollView } from "react-native"
+import { View, StyleSheet, ScrollView, FlatList } from "react-native"
 import { useAtomValue, useSetAtom } from "jotai"
 import { logoutAtom } from "../../entities/auth/model/auth.state"
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
@@ -11,6 +11,7 @@ import {
 import { useEffect } from "react"
 import { CourseCard } from "../../entities/course/ui/CourseCard/CourseCard"
 import { Gaps } from "../../shared/tokens"
+import { StudentCourseDescription } from "../../entities/course/model/course.model"
 
 export default function MyCourses() {
   const { isDarkMode } = useTheme()
@@ -38,31 +39,48 @@ export default function MyCourses() {
     loadCourse()
   }, [])
 
-  return (
-    <ScrollView>
+  const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
+    return (
       <View style={styles.container}>
-        {courses.length > 0 &&
-          courses.map((c) => (
-            <CourseCard
-              key={c.id}
-              id={c.id}
-              image={c.image}
-              title={c.title}
-              courseOnDirection={c.courseOnDirection}
-              shortTitle={c.shortTitle}
-              alias={c.alias}
-              description={c.description}
-              length={c.length}
-              avgRating={c.avgRating}
-              price={c.price}
-              tariffs={c.tariffs}
-              progress={c.progress}
-            />
-          ))}
+        <CourseCard {...item} />
       </View>
-      <View style={styles.bottom}>
-        <ThemeSwitch />
-      </View>
-    </ScrollView>
+    )
+  }
+
+  return (
+    // <ScrollView>
+    //   <View style={styles.container}>
+    //     {courses.length > 0 &&
+    //       courses.map((c) => (
+    //         <CourseCard
+    //           key={c.id}
+    //           id={c.id}
+    //           image={c.image}
+    //           title={c.title}
+    //           courseOnDirection={c.courseOnDirection}
+    //           shortTitle={c.shortTitle}
+    //           alias={c.alias}
+    //           description={c.description}
+    //           length={c.length}
+    //           avgRating={c.avgRating}
+    //           price={c.price}
+    //           tariffs={c.tariffs}
+    //           progress={c.progress}
+    //         />
+    //       ))}
+    //   </View>
+    //   <View style={styles.bottom}>
+    //     <ThemeSwitch />
+    //   </View>
+    // </ScrollView>
+    <>
+      {courses.length > 0 && (
+        <FlatList
+          data={courses}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={renderCourse}
+        />
+      )}
+    </>
   )
 }

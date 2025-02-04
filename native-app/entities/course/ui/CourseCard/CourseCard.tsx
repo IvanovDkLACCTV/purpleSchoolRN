@@ -9,7 +9,7 @@ import React, { useState } from "react"
 
 export function CourseCard({
   image,
-  title,
+  shortTitle,
   courseOnDirection,
 }: StudentCourseDescription) {
   const { isDarkMode } = useTheme()
@@ -20,7 +20,7 @@ export function CourseCard({
     card: {
       flexDirection: "column",
       borderRadius: Radius.r10,
-      backgroundColor: theme.background,
+      backgroundColor: theme.inputBackground,
     },
     image: {
       width: "100%",
@@ -76,7 +76,7 @@ export function CourseCard({
         </View>
       )}
       <View style={styles.header}>
-        <Text style={[styles.title, { color: theme.text }]}>{title}</Text>
+        <Text style={[styles.title, { color: theme.text }]}>{shortTitle}</Text>
         <View style={styles.chips}>
           {courseOnDirection.length > 0 &&
             courseOnDirection.map((c, index) => (

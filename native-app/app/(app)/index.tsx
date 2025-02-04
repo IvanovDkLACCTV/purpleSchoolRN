@@ -1,4 +1,10 @@
-import { View, StyleSheet, FlatList } from "react-native"
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  ActivityIndicator,
+  RefreshControl,
+} from "react-native"
 import { useAtomValue, useSetAtom } from "jotai"
 
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
@@ -31,6 +37,7 @@ export default function MyCourses() {
       marginTop: "auto",
       backgroundColor: theme.background,
     },
+    activity: { marginTop: 30 },
   })
 
   const loadCourse = useSetAtom(loadCourseAtom)
@@ -49,8 +56,23 @@ export default function MyCourses() {
 
   return (
     <>
+      {isLoading && (
+        <ActivityIndicator
+          style={styles.activity}
+          size="large"
+          color={theme.preHover}
+        />
+      )}
       {courses.length > 0 && (
         <FlatList
+          refreshControl={
+            <RefreshControl
+              tintColor={theme.preHover}
+              titleColor={theme.text}
+              refreshing={isLoading}
+              onRefresh={loadCourse}
+            />
+          }
           data={courses}
           keyExtractor={(item) => item.id.toString()}
           renderItem={renderCourse}

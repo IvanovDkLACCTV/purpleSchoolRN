@@ -28,6 +28,7 @@ export const Colors = {
 
 export const Gaps = {
   g8: 8,
+  g10: 10,
   g16: 16,
   g20: 20,
   g24: 24,
@@ -46,6 +47,7 @@ export const FontSize = {
   f16: 16,
   f18: 18,
   f20: 20,
+  f21: 21,
   f24: 24,
   f26: 26,
 }

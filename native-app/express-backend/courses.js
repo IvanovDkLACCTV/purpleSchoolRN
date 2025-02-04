@@ -13,7 +13,10 @@ const courses = [
     length: 10,
     avgRating: 4.5,
     price: 100,
-    courseOnDirection: [{ direction: { name: "Direction 1" } }],
+    courseOnDirection: [
+      { direction: { name: "Frontend", id: 1 } },
+      { direction: { name: "Backend", id: 2 } },
+    ],
     tariffs: [
       {
         id: 1567,
@@ -42,7 +45,7 @@ const courses = [
     length: 20,
     avgRating: 4.7,
     price: 150,
-    courseOnDirection: [{ direction: { name: "Direction 2" } }],
+    courseOnDirection: [{ direction: { name: "Backend", id: 2 } }],
     tariffs: [
       {
         id: 2463,
@@ -71,7 +74,10 @@ const courses = [
     length: 15,
     avgRating: 4.2,
     price: 120,
-    courseOnDirection: [{ direction: { name: "Direction 3" } }],
+    courseOnDirection: [
+      { direction: { name: "Devops", id: 3 } },
+      { direction: { name: "Backend", id: 2 } },
+    ],
     tariffs: [
       {
         id: 3789,

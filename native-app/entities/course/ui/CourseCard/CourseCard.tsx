@@ -4,7 +4,7 @@ import { Theme } from "../../../../constants/Colors"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Chip } from "../../../../shared/Chip/Chip"
 import { Button } from "../../../../shared/Button/Button"
-import { Radius } from "../../../../shared/tokens"
+import { FontSize, Gaps, Radius } from "../../../../shared/tokens"
 import React, { useState } from "react"
 
 export function CourseCard({
@@ -26,6 +26,8 @@ export function CourseCard({
       width: "100%",
       height: 200,
       borderRadius: Radius.r10,
+      borderBottomLeftRadius: 0,
+      borderBottomRightRadius: 0,
     },
     imagePlaceholder: {
       width: "100%",
@@ -35,10 +37,28 @@ export function CourseCard({
       backgroundColor: theme.border,
       borderRadius: Radius.r10,
     },
-    title: {},
-    chips: {},
-    header: {},
-    footer: {},
+    title: {
+      fontFamily: "Poppins",
+      fontSize: FontSize.f21,
+      fontWeight: "bold",
+      color: theme.text,
+      marginBottom: 12,
+    },
+    chips: {
+      flexDirection: "row",
+      gap: Gaps.g10,
+    },
+    header: {
+      paddingHorizontal: 24,
+      paddingVertical: 18,
+    },
+    footer: {
+      backgroundColor: theme.inputBackground,
+      paddingHorizontal: 24,
+      paddingVertical: 20,
+      borderBottomLeftRadius: 10,
+      borderBottomRightRadius: 10,
+    },
   })
 
   return (
@@ -65,7 +85,7 @@ export function CourseCard({
         </View>
       </View>
       <View style={styles.footer}>
-        <Button title="Buy" />
+        <Button title="Buy" isDarkMode={isDarkMode} />
       </View>
     </View>
   )

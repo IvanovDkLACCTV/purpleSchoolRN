@@ -1,6 +1,6 @@
-import { View, StyleSheet, ScrollView, FlatList } from "react-native"
+import { View, StyleSheet, FlatList } from "react-native"
 import { useAtomValue, useSetAtom } from "jotai"
-import { logoutAtom } from "../../entities/auth/model/auth.state"
+
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
 import ThemeSwitch from "../../shared/ThemeSwitch/ThemeSwitch"
@@ -48,31 +48,6 @@ export default function MyCourses() {
   }
 
   return (
-    // <ScrollView>
-    //   <View style={styles.container}>
-    //     {courses.length > 0 &&
-    //       courses.map((c) => (
-    //         <CourseCard
-    //           key={c.id}
-    //           id={c.id}
-    //           image={c.image}
-    //           title={c.title}
-    //           courseOnDirection={c.courseOnDirection}
-    //           shortTitle={c.shortTitle}
-    //           alias={c.alias}
-    //           description={c.description}
-    //           length={c.length}
-    //           avgRating={c.avgRating}
-    //           price={c.price}
-    //           tariffs={c.tariffs}
-    //           progress={c.progress}
-    //         />
-    //       ))}
-    //   </View>
-    //   <View style={styles.bottom}>
-    //     <ThemeSwitch />
-    //   </View>
-    // </ScrollView>
     <>
       {courses.length > 0 && (
         <FlatList
@@ -81,6 +56,9 @@ export default function MyCourses() {
           renderItem={renderCourse}
         />
       )}
+      <View style={styles.bottom}>
+        <ThemeSwitch />
+      </View>
     </>
   )
 }

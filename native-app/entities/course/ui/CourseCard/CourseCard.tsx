@@ -1,15 +1,18 @@
 import { Image, Linking, StyleSheet, Text, View } from "react-native"
+import React, { useState } from "react"
+import MaskedView from "@react-native-masked-view/masked-view"
+import { LinearGradient } from "expo-linear-gradient"
 import { StudentCourseDescription } from "../../model/course.model"
 import { Theme } from "../../../../constants/Colors"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Chip } from "../../../../shared/Chip/Chip"
 import { Button } from "../../../../shared/Button/Button"
 import { FontSize, Gaps, Radius } from "../../../../shared/tokens"
-import React, { useState } from "react"
 
 export function CourseCard({
   image,
   shortTitle,
+  tariffs,
   courseOnDirection,
 }: StudentCourseDescription) {
   const { isDarkMode } = useTheme()
@@ -51,15 +54,30 @@ export function CourseCard({
     header: {
       paddingHorizontal: 24,
       paddingVertical: 18,
+      flexDirection: "column",
     },
     footer: {
       backgroundColor: theme.inputBackground,
       paddingHorizontal: 24,
-      paddingVertical: 20,
+      paddingBottom: 24,
       borderBottomLeftRadius: 10,
       borderBottomRightRadius: 10,
     },
+    gradient: {
+      opacity: 0,
+    },
+    maskView: {
+      marginTop: 12,
+      fontSize: FontSize.f16,
+      fontFamily: "Poppins",
+    },
   })
+
+  const gradientColors = isDarkMode
+    ? ([Theme.dark.preHover, Theme.dark.gradientDarkPurple] as const)
+    : ([Theme.light.preHover, Theme.light.hover] as const)
+
+  const locations = [0, 1] as const
 
   return (
     <View style={styles.card}>
@@ -82,6 +100,27 @@ export function CourseCard({
             courseOnDirection.map((c, index) => (
               <Chip key={index} text={c.direction.name} />
             ))}
+        </View>
+        <View>
+          <MaskedView
+            style={styles.maskView}
+            maskElement={
+              <Text style={styles.gradient}>
+                Plan &laquo;{tariffs[0].name}&raquo;
+              </Text>
+            }
+          >
+            <LinearGradient
+              colors={gradientColors}
+              locations={locations}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+            >
+              <Text style={styles.gradient}>
+                Plan &laquot;{tariffs[0].name}&raquo;
+              </Text>
+            </LinearGradient>
+          </MaskedView>
         </View>
       </View>
       <View style={styles.footer}>

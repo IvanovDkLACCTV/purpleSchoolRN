@@ -106,7 +106,11 @@ const courses = [
     length: 12,
     avgRating: 4.6,
     price: 110,
-    courseOnDirection: [{ direction: { name: "Frontend", id: 1 } }],
+    courseOnDirection: [
+      { direction: { name: "Frontend", id: 1 } },
+      { direction: { name: "Backend", id: 2 } },
+      { direction: { name: "Devops", id: 3 } },
+    ],
     tariffs: [
       {
         id: 4568,

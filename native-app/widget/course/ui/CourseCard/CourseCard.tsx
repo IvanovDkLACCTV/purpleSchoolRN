@@ -2,19 +2,23 @@ import { Image, Linking, StyleSheet, Text, View } from "react-native"
 import React, { useState } from "react"
 import MaskedView from "@react-native-masked-view/masked-view"
 import { LinearGradient } from "expo-linear-gradient"
-import { StudentCourseDescription } from "../../model/course.model"
+import { StudentCourseDescription } from "../../../../entities/course/model/course.model"
 import { Theme } from "../../../../constants/Colors"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
 import { Chip } from "../../../../shared/Chip/Chip"
 import { Button } from "../../../../shared/Button/Button"
 import { FontSize, Gaps, Radius } from "../../../../shared/tokens"
+import { CourseProgress } from "../../../../entities/course/ui/CourseProgress/CourseProgress"
 
 export function CourseCard({
   image,
   shortTitle,
   tariffs,
   courseOnDirection,
-}: StudentCourseDescription) {
+  totalLessons,
+  passedLessons,
+  progress,
+}: StudentCourseDescription & { totalLessons: number; passedLessons: number }) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
   const [imageError, setImageError] = useState(false)
@@ -64,18 +68,38 @@ export function CourseCard({
       borderBottomRightRadius: 10,
     },
     gradient: {
-      opacity: 0,
+      opacity: 1,
     },
     maskView: {
       marginTop: 12,
-      fontSize: FontSize.f16,
+      fontSize: FontSize.f20,
       fontFamily: "Poppins",
+      fontWeight: "bold",
+    },
+    progressBarContainer: {
+      width: "100%",
+      height: 8,
+      backgroundColor: theme.border,
+      borderRadius: 5,
+      marginBottom: 8,
+      position: "relative",
+    },
+    progressBar: {
+      height: "100%",
+      backgroundColor: theme.tint,
+      borderRadius: Radius.r10,
+    },
+    percentageText: {
+      position: "absolute",
+      left: 0,
+      top: 12,
+      color: theme.text,
     },
   })
 
   const gradientColors = isDarkMode
-    ? ([Theme.dark.preHover, Theme.dark.gradientDarkPurple] as const)
-    : ([Theme.light.preHover, Theme.light.hover] as const)
+    ? ([Theme.light.hover, Theme.light.preHover] as const)
+    : ([Theme.dark.tint, Theme.dark.gradientDarkPurple] as const)
 
   const locations = [0, 1] as const
 
@@ -94,6 +118,7 @@ export function CourseCard({
         </View>
       )}
       <View style={styles.header}>
+        <CourseProgress progress={progress} />
         <Text style={[styles.title, { color: theme.text }]}>{shortTitle}</Text>
         <View style={styles.chips}>
           {courseOnDirection.length > 0 &&
@@ -116,7 +141,7 @@ export function CourseCard({
               start={{ x: 0, y: 0 }}
               end={{ x: 1, y: 0 }}
             >
-              <Text style={styles.gradient}>
+              <Text style={{ opacity: 0.3 }}>
                 Plan &laquot;{tariffs[0].name}&raquo;
               </Text>
             </LinearGradient>

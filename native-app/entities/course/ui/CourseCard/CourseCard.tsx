@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Image, Linking, StyleSheet, Text, View } from "react-native"
 import { StudentCourseDescription } from "../../model/course.model"
 import { Theme } from "../../../../constants/Colors"
 import { useTheme } from "../../../../shared/ThemeSwitch/ThemeContext"
@@ -85,7 +85,11 @@ export function CourseCard({
         </View>
       </View>
       <View style={styles.footer}>
-        <Button title="Buy" isDarkMode={isDarkMode} />
+        <Button
+          title="Buy"
+          isDarkMode={isDarkMode}
+          onPress={() => Linking.openURL("https://google.com")}
+        />
       </View>
     </View>
   )

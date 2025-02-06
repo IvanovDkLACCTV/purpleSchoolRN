@@ -36,8 +36,11 @@ export function CourseProgress({
       borderRadius: Radius.r10,
       width: `${progressPercentage}%`,
     },
-    percentageText: {
+    percentageTextLeft: {
       color: theme.progressBar,
+    },
+    percentageTextRight: {
+      color: Theme.dark.border,
     },
     header: {
       flexDirection: "row",
@@ -52,8 +55,10 @@ export function CourseProgress({
   return (
     <View style={styles.progressBarContainer}>
       <View style={styles.header}>
-        <Text style={styles.percentageText}>{progress.progressPercent}%</Text>
-        <Text style={styles.percentageText}>
+        <Text style={styles.percentageTextLeft}>
+          {progress.progressPercent}%
+        </Text>
+        <Text style={styles.percentageTextRight}>
           {passedLessons}/{totalLessons}
         </Text>
       </View>

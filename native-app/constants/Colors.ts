@@ -13,6 +13,7 @@ export const Theme = {
     lighter: Colors.preHover,
     error: Colors.tomato,
     border: Colors.borderLight,
+    progressBar: Colors.progressBarLight,
   },
   dark: {
     background: Colors.black,
@@ -28,5 +29,6 @@ export const Theme = {
     error: Colors.red,
     gradientDarkPurple: Colors.gradientDarkPurple,
     border: Colors.borderDark,
+    progressBar: Colors.progressBarDark,
   },
 }

@@ -32,12 +32,12 @@ export function CourseProgress({
     },
     progressBar: {
       height: "100%",
-      backgroundColor: theme.preHover,
+      backgroundColor: theme.progressBar,
       borderRadius: Radius.r10,
       width: `${progressPercentage}%`,
     },
     percentageText: {
-      color: theme.text,
+      color: theme.progressBar,
     },
     header: {
       flexDirection: "row",

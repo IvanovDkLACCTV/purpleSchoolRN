@@ -24,6 +24,8 @@ export const Colors = {
   drawerBackgroundDark: "#5A2EA6",
   borderLight: "#A7E5DE",
   borderDark: "#4D5064",
+  progressBarLight: "#71D9E2",
+  progressBarDark: "#E47AD5",
 }
 
 export const Gaps = {

@@ -38,7 +38,7 @@ const courses = [
   {
     id: 2234,
     shortTitle: "Course 2",
-    image: "http://192.168.1.116:3030/uploads/bradly.jpeg",
+    image: "http://192.168.1.116:3030/uploads/1736834045203.jpeg",
     title: "Advanced Course 2",
     alias: "course-2",
     description: "Description of Course 2",
@@ -132,7 +132,7 @@ const courses = [
   {
     id: 5678,
     shortTitle: "Course 5",
-    image: "http://192.168.1.116:3030/uploads/1736834045203.jpeg",
+    image: "http://192.168.1.116:3030/uploads/bradly.jpeg",
     title: "Advanced Course 5",
     alias: "course-5",
     description: "Description of Course 5",

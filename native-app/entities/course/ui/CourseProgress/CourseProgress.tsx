@@ -6,16 +6,20 @@ import { Radius } from "../../../../shared/tokens"
 
 export function CourseProgress({
   progress,
+  passedLessons,
+  totalLessons,
 }: {
   progress: {
     progressPercent: number
     tariffLessonsCount: number
     userViewedLessonsCount: number
   }
+  passedLessons: number
+  totalLessons: number
 }) {
   const { isDarkMode } = useTheme()
   const theme = isDarkMode ? Theme.dark : Theme.light
-  const progressPercentage = progress.progressPercent
+  const progressPercentage = Math.round((passedLessons / totalLessons) * 100)
 
   const styles = StyleSheet.create({
     progressBarContainer: {
@@ -33,16 +37,27 @@ export function CourseProgress({
       width: `${progressPercentage}%`,
     },
     percentageText: {
-      position: "absolute",
-      left: 0,
-      top: -24,
       color: theme.text,
+    },
+    header: {
+      flexDirection: "row",
+      justifyContent: "space-between",
+      position: "absolute",
+      top: -24,
+      width: "100%",
+      paddingHorizontal: 10,
     },
   })
 
   return (
     <View style={styles.progressBarContainer}>
-      <Text style={styles.percentageText}>{progress.progressPercent}%</Text>
+      <View style={styles.header}>
+        <Text style={styles.percentageText}>{progress.progressPercent}%</Text>
+        <Text style={styles.percentageText}>
+          {passedLessons}/{totalLessons}
+        </Text>
+      </View>
+
       <View
         style={[styles.progressBar, { width: `${progress.progressPercent}%` }]}
       />

@@ -6,7 +6,7 @@ const courses = [
   {
     id: 1234,
     shortTitle: "Course 1",
-    image: "http://192.168.1.143:3030/api-v2/uploads/tony.jpeg",
+    image: "http://192.168.1.116:3030/uploads/1736852512087.jpeg",
     title: "Introduction to Course 1",
     alias: "course-1",
     description: "Description of Course 1",
@@ -38,7 +38,7 @@ const courses = [
   {
     id: 2234,
     shortTitle: "Course 2",
-    image: "https://192.168.1.143:3030/uploads/bradly.jpeg",
+    image: "http://192.168.1.116:3030/uploads/bradly.jpeg",
     title: "Advanced Course 2",
     alias: "course-2",
     description: "Description of Course 2",
@@ -67,7 +67,7 @@ const courses = [
   {
     id: 3657,
     shortTitle: "Course 3",
-    image: "https://192.168.1.143:3030/uploads/1736936177326.jpeg",
+    image: "http://192.168.1.116:3030/uploads/tony.jpeg",
     title: "Beginner Course 3",
     alias: "course-3",
     description: "Description of Course 3",
@@ -99,7 +99,7 @@ const courses = [
   {
     id: 4568,
     shortTitle: "Course 4",
-    image: "https://192.168.1.143:3030/uploads/course4.jpeg",
+    image: "http://192.168.1.116:3030/uploads/1736936177326.png",
     title: "Intermediate Course 4",
     alias: "course-4",
     description: "Description of Course 4",
@@ -132,7 +132,7 @@ const courses = [
   {
     id: 5678,
     shortTitle: "Course 5",
-    image: "https://192.168.1.143:3030/uploads/course5.jpeg",
+    image: "http://192.168.1.116:3030/uploads/1736834045203.jpeg",
     title: "Advanced Course 5",
     alias: "course-5",
     description: "Description of Course 5",
@@ -161,7 +161,7 @@ const courses = [
   {
     id: 6789,
     shortTitle: "Course 6",
-    image: "https://192.168.1.143:3030/uploads/course6.jpeg",
+    image: "http://192.168.1.116:3030/uploads/course6.jpeg",
     title: "Expert Course 6",
     alias: "course-6",
     description: "Description of Course 6",
@@ -190,7 +190,7 @@ const courses = [
   {
     id: 7890,
     shortTitle: "Course 7",
-    image: "https://192.168.1.143:3030/uploads/course7.jpeg",
+    image: "http://192.168.1.116:3030/uploads/1736852512087.jpeg",
     title: "Beginner Course 7",
     alias: "course-7",
     description: "Description of Course 7",
@@ -219,7 +219,7 @@ const courses = [
   {
     id: 8901,
     shortTitle: "Course 8",
-    image: "https://192.168.1.143:3030/uploads/course8.jpeg",
+    image: "http://192.168.1.116:3030/uploads/1736852512087.jpeg",
     title: "Advanced Course 8",
     alias: "course-8",
     description: "Description of Course 8",

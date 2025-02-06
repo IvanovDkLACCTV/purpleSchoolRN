@@ -118,7 +118,11 @@ export function CourseCard({
         </View>
       )}
       <View style={styles.header}>
-        <CourseProgress progress={progress} />
+        <CourseProgress
+          progress={progress}
+          totalLessons={progress.tariffLessonsCount}
+          passedLessons={progress.userViewedLessonsCount}
+        />
         <Text style={[styles.title, { color: theme.text }]}>{shortTitle}</Text>
         <View style={styles.chips}>
           {courseOnDirection.length > 0 &&

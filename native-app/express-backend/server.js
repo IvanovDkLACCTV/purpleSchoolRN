@@ -37,6 +37,7 @@ const allowedOrigins = [
   "http://192.168.3.12:3030",
   "http://192.168.1.143:3030", // Android, Web local
   "http://192.168.1.143:3000", // Web React dev server
+  "http://192.168.1.116:3030",
   "http://localhost:8081/",
   "http://localhost:3000",
 ]
@@ -182,7 +183,7 @@ app.use("/api-v2", router)
 // Start the server
 app.listen(port, () => {
   console.log(
-    `Server running on http://localhost:${port} (http://192.168.1.143:${port})`
+    `Server running on http://localhost:${port} (http://192.168.1.116:${port})`
   )
 })
 

@@ -6,6 +6,8 @@ import {
   RefreshControl,
 } from "react-native"
 import { useAtomValue, useSetAtom } from "jotai"
+import { useEffect } from "react"
+import * as Notifications from "expo-notifications"
 
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
@@ -14,10 +16,10 @@ import {
   courseAtom,
   loadCourseAtom,
 } from "../../entities/course/model/course.state"
-import { useEffect } from "react"
 import { CourseCard } from "../../widget/course/ui/CourseCard/CourseCard"
 import { Gaps } from "../../shared/tokens"
 import { StudentCourseDescription } from "../../entities/course/model/course.model"
+import { Button } from "../../shared/Button/Button"
 
 export default function MyCourses() {
   const { isDarkMode } = useTheme()
@@ -49,9 +51,23 @@ export default function MyCourses() {
   const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
     return (
       <View style={styles.container}>
-        <CourseCard {...item} />
+        <CourseCard totalLessons={0} passedLessons={0} {...item} />
       </View>
     )
+  }
+
+  const scheduleNotification = () => {
+    Notifications.scheduleNotificationAsync({
+      content: {
+        title: "You have new notification",
+        body: "You're awesome, dude!",
+        data: { success: true },
+      },
+      trigger: {
+        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
+        seconds: 5,
+      },
+    })
   }
 
   return (
@@ -63,6 +79,7 @@ export default function MyCourses() {
           color={theme.preHover}
         />
       )}
+
       {courses.length > 0 && (
         <FlatList
           refreshControl={
@@ -79,6 +96,11 @@ export default function MyCourses() {
         />
       )}
       <View style={styles.bottom}>
+        <Button
+          title="Remind me later"
+          isDarkMode={isDarkMode}
+          onPress={scheduleNotification}
+        />
         <ThemeSwitch />
       </View>
     </>

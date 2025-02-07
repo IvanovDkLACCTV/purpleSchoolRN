@@ -2,6 +2,8 @@ import { Redirect } from "expo-router"
 import { useAtomValue } from "jotai"
 import { GestureHandlerRootView } from "react-native-gesture-handler"
 import { Drawer } from "expo-router/drawer"
+import { useState } from "react"
+import * as Notifications from "expo-notifications"
 
 import { authAtom } from "../../entities/auth/model/auth.state"
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
@@ -9,7 +11,14 @@ import { Theme } from "../../constants/Colors"
 import { FontSize } from "../../shared/tokens"
 import { MenuButton } from "../../features/layout/ui/MenuButton/MenuButton"
 import { CustomDrawer } from "../../widget/layout/ui/CustomDrawer/CustomDrawer"
-import { useState } from "react"
+
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: true,
+    shouldSetBadge: true,
+  }),
+})
 
 export default function AppLayout() {
   const { access_token } = useAtomValue(authAtom)

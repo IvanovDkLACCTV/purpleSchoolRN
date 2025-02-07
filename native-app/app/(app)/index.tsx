@@ -40,6 +40,10 @@ export default function MyCourses() {
       backgroundColor: theme.background,
     },
     activity: { marginTop: 30 },
+    reminder: {
+      paddingHorizontal: 30,
+      paddingTop: 8,
+    },
   })
 
   const loadCourse = useSetAtom(loadCourseAtom)
@@ -56,7 +60,23 @@ export default function MyCourses() {
     )
   }
 
-  const scheduleNotification = () => {
+  const allowNotification = async () => {
+    const settings = await Notifications.getPermissionsAsync()
+    return (
+      settings.granted ||
+      settings.ios?.status == Notifications.IosAuthorizationStatus.PROVISIONAL
+    )
+  }
+
+  const requestPermission = async () => {
+    return Notifications.requestPermissionsAsync()
+  }
+
+  const scheduleNotification = async () => {
+    const granted = await allowNotification()
+    if (!granted) {
+      await requestPermission()
+    }
     Notifications.scheduleNotificationAsync({
       content: {
         title: "You have new notification",
@@ -65,7 +85,7 @@ export default function MyCourses() {
       },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-        seconds: 5,
+        seconds: 60,
       },
     })
   }
@@ -96,11 +116,13 @@ export default function MyCourses() {
         />
       )}
       <View style={styles.bottom}>
-        <Button
-          title="Remind me later"
-          isDarkMode={isDarkMode}
-          onPress={scheduleNotification}
-        />
+        <View style={styles.reminder}>
+          <Button
+            title="Remind me later"
+            isDarkMode={isDarkMode}
+            onPress={scheduleNotification}
+          />
+        </View>
         <ThemeSwitch />
       </View>
     </>

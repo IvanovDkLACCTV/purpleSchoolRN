@@ -41,8 +41,10 @@ export default function MyCourses() {
     },
     activity: { marginTop: 30 },
     reminder: {
+      flexDirection: "row",
+      gap: 10,
       paddingHorizontal: 30,
-      paddingTop: 8,
+      paddingVertical: 8,
     },
   })
 
@@ -50,6 +52,19 @@ export default function MyCourses() {
 
   useEffect(() => {
     loadCourse()
+
+    const notificationListener =
+      Notifications.addNotificationResponseReceivedListener((notification) => {
+        console.log(
+          "Notification received:",
+          notification.notification.request.content.data
+        )
+      })
+
+    return () => {
+      console.log("Removing notification listener")
+      notificationListener.remove()
+    }
   }, [])
 
   const renderCourse = ({ item }: { item: StudentCourseDescription }) => {
@@ -85,9 +100,14 @@ export default function MyCourses() {
       },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-        seconds: 60,
+        seconds: 30,
       },
     })
+  }
+
+  const stopNotifications = async () => {
+    await Notifications.cancelAllScheduledNotificationsAsync()
+    console.log("All scheduled notifications canceled")
   }
 
   return (
@@ -122,8 +142,13 @@ export default function MyCourses() {
             isDarkMode={isDarkMode}
             onPress={scheduleNotification}
           />
+          <Button
+            title="Stop Notifications"
+            onPress={stopNotifications}
+            isDarkMode={!isDarkMode}
+          />
+          <ThemeSwitch />
         </View>
-        <ThemeSwitch />
       </View>
     </>
   )

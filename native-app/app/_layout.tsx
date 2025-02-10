@@ -1,11 +1,13 @@
 import { Stack, SplashScreen } from "expo-router"
-import { Theme } from "../constants/Colors"
-import { ThemeProvider, useTheme } from "../shared/ThemeSwitch/ThemeContext"
 import { LinearGradient } from "expo-linear-gradient"
 import { View, StatusBar } from "react-native"
 import { SafeAreaProvider } from "react-native-safe-area-context"
 import { useFonts } from "expo-font"
 import { useEffect } from "react"
+
+import { Notification } from "../shared/Notificaion/Notification"
+import { Theme } from "../constants/Colors"
+import { ThemeProvider, useTheme } from "../shared/ThemeSwitch/ThemeContext"
 
 SplashScreen.preventAutoHideAsync()
 
@@ -58,6 +60,7 @@ function RootLayoutContent() {
 
   return (
     <SafeAreaProvider>
+      <Notification />
       <View style={{ flex: 1 }}>
         <LinearGradient
           colors={gradientColors}

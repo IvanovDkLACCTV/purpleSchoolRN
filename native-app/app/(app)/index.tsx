@@ -6,7 +6,7 @@ import {
   RefreshControl,
 } from "react-native"
 import { useAtomValue, useSetAtom } from "jotai"
-import { useEffect } from "react"
+import React, { useEffect } from "react"
 import * as Notifications from "expo-notifications"
 
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"

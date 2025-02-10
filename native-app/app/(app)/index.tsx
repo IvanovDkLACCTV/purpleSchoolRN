@@ -94,13 +94,13 @@ export default function MyCourses() {
     }
     Notifications.scheduleNotificationAsync({
       content: {
-        title: "You have new notification",
-        body: "You're awesome, dude!",
-        data: { success: true },
+        title: "New TS course is available",
+        body: "Start now!",
+        data: { alias: "typescript" },
       },
       trigger: {
         type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-        seconds: 30,
+        seconds: 5,
       },
     })
   }

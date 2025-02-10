@@ -8,6 +8,8 @@ import {
 import { useAtomValue, useSetAtom } from "jotai"
 import React, { useEffect } from "react"
 import * as Notifications from "expo-notifications"
+import * as Device from "expo-device"
+import Constants from "expo-constants"
 
 import { useTheme } from "../../shared/ThemeSwitch/ThemeContext"
 import { Theme } from "../../constants/Colors"
@@ -92,19 +94,13 @@ export default function MyCourses() {
     if (!granted) {
       await requestPermission()
     }
-    Notifications.scheduleNotificationAsync({
-      content: {
-        title: "New TS course is available",
-        body: "Start now!",
-        data: { alias: "typescript" },
-      },
-      trigger: {
-        type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-        seconds: 5,
-      },
-    })
+    if (Device.isDevice) {
+      const token = await Notifications.getExpoPushTokenAsync({
+        projectId: Constants.expoConfig?.extra?.eas.projectId,
+      })
+      console.log(token)
+    }
   }
-
   const stopNotifications = async () => {
     await Notifications.cancelAllScheduledNotificationsAsync()
     console.log("All scheduled notifications canceled")

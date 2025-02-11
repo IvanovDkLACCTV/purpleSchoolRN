@@ -1,10 +1,15 @@
 {
   "expo": {
-    "name": "native-app",
-    "slug": "native-app",
+    "name": "Studing App with authentication",
+    "slug": "courses-app",
+    "description": "app that I wrote while learning react native",
     "version": "1.0.0",
+    "platforms": ["ios", "android"],
     "icon": "./assets/icon.png",
+    "orientation": "portrait",
     "userInterfaceStyle": "light",
+    "backgroundColor": "#F0F4F3",
+    "primaryColor": "#F0F4F3",
     "extra": {
       "eas": {
         "projectId": "a5c11940-0656-4ede-84da-ff9328dbc183"
@@ -16,7 +21,7 @@
       "backgroundColor": "#F0F4F3"
     },
     "ios": {
-      "supportsTablet": true,
+      "supportsTablet": false,
       "newArchEnabled": true
     },
     "android": {

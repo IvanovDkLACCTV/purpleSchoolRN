@@ -12,6 +12,25 @@ import { ThemeProvider, useTheme } from "../shared/ThemeSwitch/ThemeContext"
 SplashScreen.preventAutoHideAsync()
 
 export default function RootLayout() {
+  const [fontsLoaded] = useFonts({
+    Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
+  })
+
+  useEffect(() => {
+    const prepare = async () => {
+      await SplashScreen.preventAutoHideAsync()
+      if (fontsLoaded) {
+        await SplashScreen.hideAsync()
+      }
+    }
+
+    prepare()
+  }, [fontsLoaded])
+
+  if (!fontsLoaded) {
+    return null
+  }
+
   return (
     <ThemeProvider>
       <RootLayoutContent />
@@ -37,26 +56,6 @@ function RootLayoutContent() {
       ] as const)
 
   const locations = [0, 0.17, 0.55, 1] as const
-
-  const [fontsLoaded, error] = useFonts({
-    Poppins: require("../assets/fonts/Poppins-Regular.ttf"),
-  })
-
-  useEffect(() => {
-    if (fontsLoaded) {
-      SplashScreen.hideAsync()
-    }
-  }, [fontsLoaded])
-
-  useEffect(() => {
-    if (error) {
-      throw error
-    }
-  }, [error])
-
-  if (!fontsLoaded) {
-    return null
-  }
 
   return (
     <SafeAreaProvider>

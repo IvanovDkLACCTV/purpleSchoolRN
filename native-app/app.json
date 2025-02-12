@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Studing App with authentication",
-    "slug": "courses-app",
+    "slug": "coursesapp",
     "description": "app that I wrote while learning react native",
     "version": "1.0.0",
     "platforms": ["ios", "android"],
@@ -10,11 +10,6 @@
     "userInterfaceStyle": "light",
     "backgroundColor": "#F0F4F3",
     "primaryColor": "#F0F4F3",
-    "extra": {
-      "eas": {
-        "projectId": "a5c11940-0656-4ede-84da-ff9328dbc183"
-      }
-    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -30,11 +25,17 @@
         "backgroundColor": "#F0F4F3"
       },
       "permissions": [
-        "CAMERA",
-        "READ_EXTERNAL_STORAGE",
-        "WRITE_EXTERNAL_STORAGE"
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO",
+        "android.permission.CAMERA",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE",
+        "android.permission.RECORD_AUDIO"
       ],
-      "newArchEnabled": true
+      "newArchEnabled": true,
+      "package": "com.idk131.coursesapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -64,6 +65,19 @@
         }
       ]
     ],
-    "scheme": "native-app"
+    "scheme": "native-app",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a5c11940-0656-4ede-84da-ff9328dbc183"
+      }
+    },
+    "owner": "idk131",
+    "runtimeVersion": "1.0.0",
+    "updates": {
+      "url": "https://u.expo.dev/a5c11940-0656-4ede-84da-ff9328dbc183"
+    }
   }
 }
